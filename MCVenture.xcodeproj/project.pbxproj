@@ -13,7 +13,8 @@
 		A183E20DED6ED6175CB80006 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9F5289EC3DD66CA6EF5AC7 /* PrivacyPolicyView.swift */; };
 		A558501C0A068A0870F02AA0 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED8527E52C26A12DD9D897F /* EmptyStateView.swift */; };
 		B12FEF50E62632D6C36A320E /* UnitPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B39F1B42D7B74FFC8C7E50 /* UnitPreferences.swift */; };
-		BB54C4784C77F17AA0A2445A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0DD2392B30456D393333A2 /* SkeletonView.swift */; };
+		BB54C4784C77F17AA0A2445A /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0DD2392B30456D393333A2 /* SkeletonView.swift */; };		9537E0F071F54DE69C6F046D /* UserManualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70383D6062446708BE9A67D /* UserManualView.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		C293A81D90C8638AE6BC6820 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A70383D6062446708BE9A67D /* UserManualView.swift */,
 				DD7116171B9BAD8F45697518 /* Components */,
 				DC9F5289EC3DD66CA6EF5AC7 /* PrivacyPolicyView.swift */,
 			);
@@ -317,6 +319,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9537E0F071F54DE69C6F046D /* UserManualView.swift in Sources */,
 				A558501C0A068A0870F02AA0 /* EmptyStateView.swift in Sources */,
 				BB54C4784C77F17AA0A2445A /* SkeletonView.swift in Sources */,
 				A183E20DED6ED6175CB80006 /* PrivacyPolicyView.swift in Sources */,

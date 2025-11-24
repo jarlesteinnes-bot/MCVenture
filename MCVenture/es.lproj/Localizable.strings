@@ -220,3 +220,18 @@
 "premium" = "Premium";
 "offline" = "Modo Sin Conexión";
 "online" = "En Línea";
+
+// MARK: - User Manual
+"manual.title" = "Manual de Usuario";
+"manual.loading" = "Cargando manual...";
+"manual.error" = "No se pudo cargar el manual";
+"manual.retry" = "Reintentar";
+"manual.refresh" = "Actualizar";
+"manual.openSafari" = "Abrir en Safari";
+"manual.share" = "Compartir manual";
+"help.title" = "Ayuda y Soporte";
+"help.manual" = "Manual de usuario";
+"help.faq" = "FAQ";
+"help.contact" = "Contactar soporte";
+"help.website" = "Sitio web";
+"help.github" = "GitHub";

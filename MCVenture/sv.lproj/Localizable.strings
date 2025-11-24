@@ -220,3 +220,18 @@
 "premium" = "Premium";
 "offline" = "Offlineläge";
 "online" = "Online";
+
+// MARK: - User Manual
+"manual.title" = "Användarmanual";
+"manual.loading" = "Laddar manual...";
+"manual.error" = "Kunde inte ladda manualen";
+"manual.retry" = "Försök igen";
+"manual.refresh" = "Uppdatera";
+"manual.openSafari" = "Öppna i Safari";
+"manual.share" = "Dela manual";
+"help.title" = "Hjälp och Support";
+"help.manual" = "Användarmanual";
+"help.faq" = "FAQ";
+"help.contact" = "Kontakta support";
+"help.website" = "Webbplats";
+"help.github" = "GitHub";

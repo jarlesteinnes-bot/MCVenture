@@ -220,3 +220,18 @@
 "premium" = "Premium";
 "offline" = "Offline Mode";
 "online" = "Online";
+
+// MARK: - User Manual
+"manual.title" = "User Manual";
+"manual.loading" = "Loading manual...";
+"manual.error" = "Could not load manual";
+"manual.retry" = "Retry";
+"manual.refresh" = "Refresh";
+"manual.openSafari" = "Open in Safari";
+"manual.share" = "Share Manual";
+"help.title" = "Help & Support";
+"help.manual" = "User Manual";
+"help.faq" = "FAQ";
+"help.contact" = "Contact Support";
+"help.website" = "Website";
+"help.github" = "GitHub";

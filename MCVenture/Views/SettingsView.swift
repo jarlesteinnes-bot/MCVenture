@@ -76,7 +76,12 @@ class AppSettings: ObservableObject {
 struct SettingsView: View {
     @StateObject private var settings = AppSettings.shared
     @StateObject private var network = NetworkMonitor.shared
-    @ObservedObject private var        Form {
+    @ObservedObject private var localizationManager = LocalizationManager.shared
+    @State private var showingLanguagePicker = false
+    @State private var showingUserManual = false
+    
+    var body: some View {
+        Form {
             Section("General") {
                 Button(action: {
                     showingLanguagePicker = true
@@ -175,10 +180,85 @@ struct SettingsView: View {
                     Text(network.connectionType.description)
                 }
             }
+            
+            Section(header: Text("help.title".localized)) {
+                Button(action: {
+                    showingUserManual = true
+                }) {
+                    HStack {
+                        Image(systemName: "book.fill")
+                            .foregroundColor(.blue)
+                            .frame(width: 24)
+                        Text("help.manual".localized)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                Button(action: {
+                    if let url = URL(string: "https://jarlesteinnes-bot.github.io/mcventure-legal/") {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "questionmark.circle.fill")
+                            .foregroundColor(.orange)
+                            .frame(width: 24)
+                        Text("help.faq".localized)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                Button(action: {
+                    if let url = URL(string: "https://github.com/jarlesteinnes-bot/MCVenture") {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "link.circle.fill")
+                            .foregroundColor(.purple)
+                            .frame(width: 24)
+                        Text("help.github".localized)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                Button(action: {
+                    if let url = URL(string: "mailto:support@mcventure.app?subject=MCVenture%20Support") {
+                        UIApplication.shared.open(url)
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "envelope.fill")
+                            .foregroundColor(.green)
+                            .frame(width: 24)
+                        Text("help.contact".localized)
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: "arrow.up.right")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
         }
         .navigationTitle("settings.title".localized)
         .sheet(isPresented: $showingLanguagePicker) {
             LanguagePickerView()
+        }
+        .fullScreenCover(isPresented: $showingUserManual) {
+            UserManualView()
         }
     }
     
