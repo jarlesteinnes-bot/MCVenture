@@ -35,7 +35,7 @@ struct LanguagePickerView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section {
                     ForEach(SupportedLanguage.allCases) { language in

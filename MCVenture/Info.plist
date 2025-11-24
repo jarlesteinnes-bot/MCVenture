@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>MCVenture needs your location to track your trips and show nearby routes.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>MCVenture tracks your trip even when the app is in background.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>MCVenture needs camera access to capture photos during your trips.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>MCVenture needs photo library access to attach photos to your trips.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>MCVenture saves trip photos to your library.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>MCVenture uses motion data to detect crashes and enhance trip tracking.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - MCVenture</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .support-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        .support-page h1 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+        .faq-section {
+            margin-bottom: 60px;
+        }
+        .faq-item {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .faq-item h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+        .faq-item p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        .faq-item ul {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        .faq-item li {
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .contact-section {
+            background: var(--secondary-color);
+            color: var(--white);
+            padding: 50px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .contact-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .contact-methods {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .contact-method {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            min-width: 250px;
+        }
+        .contact-method h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        .contact-method a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            transition: border-color 0.3s ease;
+        }
+        .contact-method a:hover {
+            border-color: var(--white);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="support-page">
+        <a href="index.html" class="back-link">← Back to Home</a>
+        
+        <h1>Support & Help</h1>
+
+        <div class="faq-section">
+            <h2 style="font-size: 2rem; margin-bottom: 30px; color: var(--text-dark);">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>📱 How do I start using MCVenture?</h3>
+                <p>After downloading the app:</p>
+                <ul>
+                    <li>Grant location permissions when prompted</li>
+                    <li>Choose your preferred language from 8 available options</li>
+                    <li>Browse routes or tap "Track Ride" to start recording</li>
+                    <li>Enable turn-by-turn navigation by selecting a route and tapping "Navigate"</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🗺️ How does turn-by-turn navigation work?</h3>
+                <p>MCVenture provides voice-guided navigation:</p>
+                <ul>
+                    <li>Select any saved route or discovered route</li>
+                    <li>Tap the "Navigate" button to start guidance</li>
+                    <li>Voice announcements in your chosen language will guide you at 500m, 100m, and 30m before turns</li>
+                    <li>The app automatically reroutes if you go off course</li>
+                    <li>Toggle voice on/off using the speaker icon during navigation</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🚨 What is crash detection and how does it work?</h3>
+                <p>MCVenture includes automatic crash detection:</p>
+                <ul>
+                    <li>Uses your device's motion sensors to detect sudden impacts</li>
+                    <li>If a crash is detected, you'll see an alert asking if you're OK</li>
+                    <li>If you don't respond, the app can alert emergency contacts</li>
+                    <li>You can also manually activate SOS from the emergency button</li>
+                    <li>Your location is shared only when SOS is activated</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>☁️ Does MCVenture work offline?</h3>
+                <p>Yes! MCVenture supports offline usage:</p>
+                <ul>
+                    <li>Downloaded routes are available offline</li>
+                    <li>Turn-by-turn navigation works without internet</li>
+                    <li>Trip recording continues offline</li>
+                    <li>Weather alerts require internet connection</li>
+                    <li>Route discovery requires internet to browse new routes</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🔋 Does MCVenture drain my battery?</h3>
+                <p>MCVenture is optimized for battery life:</p>
+                <ul>
+                    <li>Uses battery-adaptive performance modes</li>
+                    <li>Switches to low-power mode when battery is low</li>
+                    <li>Pause tracking when stopped to save battery</li>
+                    <li>Turn off voice guidance to extend battery further</li>
+                    <li>On average, uses similar battery as other navigation apps</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>📊 Can I export my trip data?</h3>
+                <p>Yes, you can export your rides:</p>
+                <ul>
+                    <li>Open any completed trip</li>
+                    <li>Tap the share icon</li>
+                    <li>Choose "Export as GPX"</li>
+                    <li>Import into Strava, Komoot, or other apps</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🌍 Which countries are supported?</h3>
+                <p>MCVenture focuses on Europe with routes in:</p>
+                <ul>
+                    <li>Norway, Sweden, Denmark, Finland</li>
+                    <li>Germany, Austria, Switzerland</li>
+                    <li>France, Spain, Italy</li>
+                    <li>UK, Ireland, Netherlands, Belgium</li>
+                    <li>And more European countries</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🔄 How do I sync my data across devices?</h3>
+                <p>MCVenture uses iCloud sync:</p>
+                <ul>
+                    <li>Sign in with the same Apple ID on all devices</li>
+                    <li>Enable iCloud sync in Settings</li>
+                    <li>Your routes, trips, and preferences sync automatically</li>
+                    <li>Works across iPhone and iPad</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🌟 How do I rate and review routes?</h3>
+                <p>Share your experience with other riders:</p>
+                <ul>
+                    <li>Open any route</li>
+                    <li>Tap the star icon</li>
+                    <li>Rate from 1-5 stars</li>
+                    <li>Optionally add a comment</li>
+                    <li>Your rating helps others discover great routes</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🗺️ Can I create my own routes?</h3>
+                <p>Yes! Create custom routes:</p>
+                <ul>
+                    <li>Tap "Plan Route" from the main menu</li>
+                    <li>Set start and end points on the map</li>
+                    <li>Add waypoints by tapping the map</li>
+                    <li>Save and navigate your custom route</li>
+                    <li>Share with friends via CloudKit</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>⛈️ How do weather alerts work?</h3>
+                <p>MCVenture monitors weather conditions:</p>
+                <ul>
+                    <li>Checks weather along your current route</li>
+                    <li>Alerts you to rain, storms, or severe weather</li>
+                    <li>Updates in real-time during your ride</li>
+                    <li>Shows forecast for saved routes</li>
+                </ul>
+            </div>
+
+            <div class="faq-item">
+                <h3>🔒 Is my data private and secure?</h3>
+                <p>Your privacy is our priority:</p>
+                <ul>
+                    <li>All data stored locally on your device</li>
+                    <li>CloudKit sync is encrypted and private</li>
+                    <li>We never sell your data</li>
+                    <li>Location shared only when you choose</li>
+                    <li>Read our <a href="privacy.html" style="color: var(--primary-color);">Privacy Policy</a> for details</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Still Need Help?</h2>
+            <p>Get in touch with us through any of these channels:</p>
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <h3>📧 Email Support</h3>
+                    <a href="mailto:support@mcventure.app">support@mcventure.app</a>
+                    <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">Response within 24-48 hours</p>
+                </div>
+                <div class="contact-method">
+                    <h3>💻 GitHub Issues</h3>
+                    <a href="https://github.com/yourusername/mcventure/issues" target="_blank">Report a Bug</a>
+                    <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">For technical issues and feature requests</p>
+                </div>
+            </div>
+        </div>
+
+        <hr style="margin: 60px 0; border: none; border-top: 1px solid #E9ECEF;">
+
+        <p style="text-align: center; color: var(--text-light);">
+            <a href="index.html" class="back-link">Back to Home</a> | 
+            <a href="privacy.html" class="back-link">Privacy Policy</a> | 
+            <a href="terms.html" class="back-link">Terms of Service</a>
+        </p>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2025 MCVenture. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

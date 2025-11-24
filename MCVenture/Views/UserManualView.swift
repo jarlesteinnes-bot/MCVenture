@@ -15,7 +15,7 @@ struct UserManualView: View {
     @State private var loadError: String?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 // WebView
                 WebView(
@@ -30,8 +30,7 @@ struct UserManualView: View {
                     VStack(spacing: 20) {
                         ProgressView()
                             .scaleEffect(1.5)
-                        Text("manual.loading")
-                            .localized
+                        Text("manual.loading".localized)
                             .foregroundColor(.secondary)
                     }
                 }
@@ -43,8 +42,7 @@ struct UserManualView: View {
                             .font(.system(size: 50))
                             .foregroundColor(.orange)
                         
-                        Text("manual.error")
-                            .localized
+                        Text("manual.error".localized)
                             .font(.headline)
                         
                         Text(error)
@@ -58,8 +56,7 @@ struct UserManualView: View {
                             isLoading = true
                             webViewManager.reload()
                         }) {
-                            Label("manual.retry", systemImage: "arrow.clockwise")
-                                .localized
+                            Label("manual.retry".localized, systemImage: "arrow.clockwise")
                         }
                         .buttonStyle(.borderedProminent)
                     }
@@ -79,20 +76,17 @@ struct UserManualView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Button(action: { webViewManager.reload() }) {
-                            Label("manual.refresh", systemImage: "arrow.clockwise")
-                                .localized
+                            Label("manual.refresh".localized, systemImage: "arrow.clockwise")
                         }
                         
                         Button(action: { webViewManager.openInSafari() }) {
-                            Label("manual.openSafari", systemImage: "safari")
-                                .localized
+                            Label("manual.openSafari".localized, systemImage: "safari")
                         }
                         
                         Divider()
                         
                         Button(action: { webViewManager.shareManual() }) {
-                            Label("manual.share", systemImage: "square.and.arrow.up")
-                                .localized
+                            Label("manual.share".localized, systemImage: "square.and.arrow.up")
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
@@ -110,7 +104,7 @@ class WebViewManager: ObservableObject {
     
     init() {
         // Get current language from LocalizationManager
-        let currentLanguage = LocalizationManager.shared.currentLanguage.code
+        let currentLanguage = LocalizationManager.shared.currentLanguage
         
         // Map language codes to manual paths
         let languageMap: [String: String] = [

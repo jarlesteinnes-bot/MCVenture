@@ -122,4 +122,99 @@ class HapticManager {
             self.light()
         }
     }
+    
+    // MARK: - Social Interactions
+    
+    func ratingSubmitted() {
+        success()
+    }
+    
+    func commentPosted() {
+        light()
+    }
+    
+    func routeLiked() {
+        medium()
+    }
+    
+    func shareCompleted() {
+        success()
+    }
+    
+    // MARK: - Navigation Feedback
+    
+    func turnAhead() {
+        // Warning for upcoming turn
+        medium()
+    }
+    
+    func turnNow() {
+        // Strong feedback for immediate turn
+        heavy()
+    }
+    
+    func arrivedAtDestination() {
+        // Success pattern
+        success()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            self.success()
+        }
+    }
+    
+    func offRoute() {
+        // Warning pattern
+        warning()
+    }
+    
+    // MARK: - UI Interactions
+    
+    func buttonTap() {
+        light()
+    }
+    
+    func cardFlip() {
+        medium()
+    }
+    
+    func swipeAction() {
+        light()
+    }
+    
+    func pullToRefresh() {
+        light()
+    }
+    
+    func dataLoaded() {
+        soft()
+    }
+    
+    func errorOccurred() {
+        error()
+    }
+    
+    func tabChanged() {
+        selection()
+    }
+    
+    func modalPresented() {
+        medium()
+    }
+    
+    func modalDismissed() {
+        light()
+    }
+    
+    // MARK: - Advanced Patterns
+    
+    /// Custom impact with intensity (0.0 - 1.0)
+    func impact(intensity: CGFloat) {
+        let generator = UIImpactFeedbackGenerator(style: intensity > 0.7 ? .heavy : intensity > 0.4 ? .medium : .light)
+        generator.impactOccurred(intensity: intensity)
+    }
+    
+    /// Prepare haptic engine for immediate feedback (reduces latency)
+    func prepare() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.prepare()
+    }
 }

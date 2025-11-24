@@ -6,7 +6,11 @@ struct ActiveTripViewTabbed: View {
     @StateObject private var gpsManager = GPSTrackingManager.shared
     @StateObject private var voiceAnnouncer = VoiceAnnouncer()
     @StateObject private var weatherManager = WeatherManager.shared
+    @StateObject private var navigationEngine = NavigationEngine()
+    @StateObject private var voiceNavigator = VoiceNavigator()
     @EnvironmentObject var dataManager: DataManager
+    
+    let route: ScrapedRoute? // Optional route for navigation
     
     @State private var selectedTab = 0
     @State private var showFinishAlert = false
@@ -17,6 +21,7 @@ struct ActiveTripViewTabbed: View {
     @State private var showCamera = false
     @State private var showSOSAlert = false
     @State private var showCrashAlert = false
+    @State private var isNavigating = false
     
     #if os(iOS)
     @StateObject private var photoCaptureManager = PhotoCaptureManager.shared
@@ -35,6 +40,11 @@ struct ActiveTripViewTabbed: View {
                     let singlePoint = [location.coordinate]
                     weatherManager.startWeatherMonitoring(route: singlePoint)
                 }
+                // Start navigation if route provided
+                if let route = route {
+                    navigationEngine.startNavigation(route: route)
+                    isNavigating = true
+                }
             }
         .onChange(of: gpsManager.currentLocation) { newLocation in
             // Update weather monitoring with new location
@@ -44,8 +54,23 @@ struct ActiveTripViewTabbed: View {
                     await weatherManager.checkWeatherAlerts(along: path)
                 }
             }
+            // Update navigation
+            if isNavigating, let location = newLocation {
+                navigationEngine.updateLocation(location)
+                // Voice announcements
+                if let instruction = navigationEngine.currentInstruction {
+                    voiceNavigator.announceInstruction(instruction, distance: navigationEngine.distanceToNext)
+                }
+                // Handle navigation states
+                if navigationEngine.state == .offRoute {
+                    voiceNavigator.announceOffRoute()
+                } else if navigationEngine.state == .arrived {
+                    voiceNavigator.announceArrival()
+                    isNavigating = false
+                }
+            }
         }
-        .onChange(of: gpsManager.safetyMonitor.crashDetected) { newValue in
+        .onChange(of: gpsManager.safetyMonitor?.crashDetected ?? false) { newValue in
             if newValue {
                 showCrashAlert = true
                 voiceAnnouncer.announceCrashDetected()
@@ -53,11 +78,11 @@ struct ActiveTripViewTabbed: View {
         }
         .alert("Crash Detected!", isPresented: $showCrashAlert) {
             Button("I'm OK") {
-                gpsManager.safetyMonitor.resetCrashDetection()
+                gpsManager.safetyMonitor?.resetCrashDetection()
             }
             Button("Call Emergency", role: .destructive) {
                 if let location = gpsManager.currentLocation {
-                    gpsManager.safetyMonitor.activateSOS(location: location)
+                    gpsManager.safetyMonitor?.activateSOS(location: location)
                 }
             }
         } message: {
@@ -65,11 +90,11 @@ struct ActiveTripViewTabbed: View {
         }
         .alert("Emergency SOS", isPresented: $showSOSAlert) {
             Button("Cancel", role: .cancel) {
-                gpsManager.safetyMonitor.deactivateSOS()
+                gpsManager.safetyMonitor?.deactivateSOS()
             }
             Button("Activate SOS", role: .destructive) {
                 if let location = gpsManager.currentLocation {
-                    gpsManager.safetyMonitor.activateSOS(location: location)
+                    gpsManager.safetyMonitor?.activateSOS(location: location)
                 }
             }
         } message: {
@@ -111,6 +136,15 @@ struct ActiveTripViewTabbed: View {
                 
                 // Tab Content
                 tabContentView
+            }
+            
+            // Navigation Overlay (if active)
+            if isNavigating {
+                NavigationOverlayView(
+                    navigationEngine: navigationEngine,
+                    voiceNavigator: voiceNavigator
+                )
+                .allowsHitTesting(true)
             }
             
             // Floating Action Buttons
@@ -162,6 +196,25 @@ struct ActiveTripViewTabbed: View {
             }
             
             Spacer()
+            
+            // Navigation toggle (if route provided)
+            if route != nil {
+                Button(action: {
+                    if isNavigating {
+                        navigationEngine.stopNavigation()
+                        voiceNavigator.stopSpeaking()
+                    } else {
+                        if let route = route {
+                            navigationEngine.startNavigation(route: route)
+                        }
+                    }
+                    isNavigating.toggle()
+                }) {
+                    Image(systemName: isNavigating ? "location.fill" : "location")
+                        .font(.system(size: 28))
+                        .foregroundColor(isNavigating ? .blue : .white.opacity(0.6))
+                }
+            }
             
             Button(action: {
                 if isPaused {
@@ -554,11 +607,11 @@ struct ActiveTripViewTabbed: View {
                 */
                 
                 // Battery Warning
-                if gpsManager.safetyMonitor.lowBattery {
+                if gpsManager.safetyMonitor?.lowBattery ?? false {
                     HStack {
                         Image(systemName: "battery.25")
                             .foregroundColor(.red)
-                        Text("Low Battery - \(Int(gpsManager.safetyMonitor.batteryLevel * 100))%")
+                        Text("Low Battery - \(Int((gpsManager.safetyMonitor?.batteryLevel ?? 0) * 100))%")
                             .foregroundColor(.red)
                     }
                     .padding()

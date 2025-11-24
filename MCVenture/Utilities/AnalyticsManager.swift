@@ -25,7 +25,9 @@ class AnalyticsManager {
     
     /// Log a user action
     func trackAction(_ action: String, parameters: [String: Any] = [:]) {
-        logEvent("user_action", parameters: ["action": action] + parameters)
+        var mergedParams = parameters
+        mergedParams["action"] = action
+        logEvent("user_action", parameters: mergedParams)
     }
     
     /// Log when a trip is started
@@ -174,6 +176,140 @@ extension AnalyticsManager {
     /// Log when user denies permission
     func permissionDenied(_ permission: String) {
         trackAction("permission_denied", parameters: ["permission": permission])
+    }
+    
+    // MARK: - Social Features
+    
+    /// Log when user rates a route
+    func routeRated(routeId: String, rating: Int) {
+        trackAction("route_rated", parameters: [
+            "route_id": routeId,
+            "rating": rating
+        ])
+    }
+    
+    /// Log when user comments on a route
+    func routeCommented(routeId: String, commentLength: Int) {
+        trackAction("route_commented", parameters: [
+            "route_id": routeId,
+            "comment_length": commentLength
+        ])
+    }
+    
+    /// Log when user shares a route
+    func routeShared(routeId: String, method: String) {
+        trackAction("route_shared", parameters: [
+            "route_id": routeId,
+            "method": method // "link", "image", "social"
+        ])
+    }
+    
+    /// Log when user views route details
+    func routeViewed(routeId: String, source: String) {
+        trackAction("route_viewed", parameters: [
+            "route_id": routeId,
+            "source": source // "list", "map", "search", "recommendation"
+        ])
+    }
+    
+    // MARK: - Search & Discovery
+    
+    /// Log search query
+    func searchPerformed(query: String, resultsCount: Int) {
+        trackAction("search_performed", parameters: [
+            "query": query,
+            "results_count": resultsCount
+        ])
+    }
+    
+    /// Log filter usage
+    func filterApplied(filterType: String, value: String) {
+        trackAction("filter_applied", parameters: [
+            "filter_type": filterType,
+            "value": value
+        ])
+    }
+    
+    // MARK: - Engagement Metrics
+    
+    /// Track session start
+    func sessionStarted() {
+        trackAction("session_started", parameters: [
+            "timestamp": Date().timeIntervalSince1970
+        ])
+    }
+    
+    /// Track session end
+    func sessionEnded(duration: TimeInterval) {
+        trackAction("session_ended", parameters: [
+            "duration_seconds": duration
+        ])
+    }
+    
+    /// Track app foreground
+    func appForegrounded() {
+        trackAction("app_foregrounded")
+    }
+    
+    /// Track app background
+    func appBackgrounded(sessionDuration: TimeInterval) {
+        trackAction("app_backgrounded", parameters: [
+            "session_duration": sessionDuration
+        ])
+    }
+    
+    // MARK: - Navigation & Maps
+    
+    /// Log map interaction
+    func mapInteraction(action: String) {
+        trackAction("map_interaction", parameters: [
+            "action": action // "zoom", "pan", "marker_tap", "cluster_expand"
+        ])
+    }
+    
+    /// Log offline map download
+    func offlineMapDownloaded(region: String, sizeKB: Int) {
+        trackAction("offline_map_downloaded", parameters: [
+            "region": region,
+            "size_kb": sizeKB
+        ])
+    }
+    
+    // MARK: - Performance Metrics
+    
+    /// Track app launch time
+    func appLaunchCompleted(duration: TimeInterval) {
+        trackAction("app_launch", parameters: [
+            "duration_ms": Int(duration * 1000)
+        ])
+        
+        if duration > 3.0 {
+            logger.warning("⚠️ Slow app launch: \(String(format: "%.2f", duration))s")
+        }
+    }
+    
+    /// Track memory usage
+    func memoryUsageReported(usedMB: Int, availableMB: Int) {
+        logEvent("memory_usage", parameters: [
+            "used_mb": usedMB,
+            "available_mb": availableMB
+        ])
+    }
+    
+    // MARK: - Conversion Events
+    
+    /// Track premium feature viewed
+    func premiumFeatureViewed(feature: String) {
+        trackAction("premium_feature_viewed", parameters: [
+            "feature": feature
+        ])
+    }
+    
+    /// Track upgrade prompt shown
+    func upgradePromptShown(trigger: String) {
+        trackAction("upgrade_prompt_shown", parameters: [
+            "trigger": trigger
+        ])
     }
 }
 

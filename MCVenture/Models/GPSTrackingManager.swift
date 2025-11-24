@@ -46,7 +46,7 @@ class GPSTrackingManager: NSObject, ObservableObject {
     @Published var photos: [TripPhoto] = []
     
     // Safety Monitor
-    @Published var safetyMonitor = SafetyMonitor()
+    @Published var safetyMonitor: SafetyMonitor?
     
     // Auto-pause
     @Published var autoPauseEnabled = true
@@ -80,6 +80,9 @@ class GPSTrackingManager: NSObject, ObservableObject {
         // Load crash detection threshold from settings BEFORE super.init
         let savedThreshold = UserDefaults.standard.double(forKey: "crashDetectionThreshold")
         self.crashThreshold = savedThreshold > 0 ? savedThreshold : 4.5 // Default 4.5 G (reduced false positives)
+        
+        // SafetyMonitor will be initialized on first use
+        self.safetyMonitor = nil
         
         super.init()
         locationManager.delegate = self
@@ -126,7 +129,9 @@ class GPSTrackingManager: NSObject, ObservableObject {
         startCrashDetection()
         
         // Start Pro Mode tracking
-        proModeManager.startProTracking()
+        Task { @MainActor in
+            proModeManager.startProTracking()
+        }
         
         // Start timer for duration and calculations
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
@@ -153,7 +158,9 @@ class GPSTrackingManager: NSObject, ObservableObject {
         motionManager.stopAccelerometerUpdates()
         
         // Stop Pro Mode tracking
-        proModeManager.stopProTracking()
+        Task { @MainActor in
+            proModeManager.stopProTracking()
+        }
         
         let summary = TripSummary(
             distance: tripDistance,
@@ -354,13 +361,15 @@ extension GPSTrackingManager: CLLocationManagerDelegate {
             fuelTrackingManager.updateFuelConsumption(distanceTraveledKm: tripDistance)
             
             // Update Pro Mode analytics
-            if proModeManager.isProModeEnabled {
-                let heading = location.course >= 0 ? location.course : 0
-                proModeManager.updateAnalytics(speed: currentSpeed, location: location.coordinate, heading: heading)
-                
-                // Record route if enabled
-                if proModeManager.routeRecordingEnabled {
-                    proModeManager.routeRecorder.recordLocation(location: location, speed: currentSpeed)
+            Task { @MainActor in
+                if proModeManager.isProModeEnabled {
+                    let heading = location.course >= 0 ? location.course : 0
+                    proModeManager.updateAnalytics(speed: currentSpeed, location: location.coordinate, heading: heading)
+                    
+                    // Record route if enabled
+                    if proModeManager.routeRecordingEnabled {
+                        proModeManager.routeRecorder.recordLocation(location: location, speed: currentSpeed)
+                    }
                 }
             }
         }

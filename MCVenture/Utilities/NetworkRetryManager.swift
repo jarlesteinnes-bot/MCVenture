@@ -57,7 +57,7 @@ class NetworkRetryManager {
         }
         
         // All retries exhausted
-        throw lastError ?? NetworkError.maxRetriesExceeded
+        throw lastError ?? RetryError.maxRetriesExceeded
     }
     
     /// Determines if an error is retryable
@@ -87,8 +87,8 @@ class NetworkRetryManager {
     }
 }
 
-// MARK: - Network Errors
-enum NetworkError: LocalizedError {
+// MARK: - Retry Errors
+enum RetryError: LocalizedError {
     case maxRetriesExceeded
     case invalidResponse
     case noData

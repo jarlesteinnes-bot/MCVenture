@@ -140,6 +140,22 @@ struct ScrapedRoute: Identifiable, Codable, Hashable {
         cachedDate = nil
         cacheExpiryDate = nil
     }
+    
+    // Helper: Get center coordinate of route
+    var centerCoordinate: CLLocationCoordinate2D? {
+        guard !coordinates.isEmpty else { return startPoint.coordinate.clCoordinate }
+        let totalLat = coordinates.reduce(0.0) { $0 + $1.latitude }
+        let totalLon = coordinates.reduce(0.0) { $0 + $1.longitude }
+        return CLLocationCoordinate2D(
+            latitude: totalLat / Double(coordinates.count),
+            longitude: totalLon / Double(coordinates.count)
+        )
+    }
+    
+    // Helper: Convert to CLLocationCoordinate2D array for navigation
+    var clLocationCoordinates: [CLLocationCoordinate2D] {
+        coordinates.map { $0.clCoordinate }
+    }
 }
 
 // MARK: - Supporting Enums

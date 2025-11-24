@@ -115,7 +115,7 @@ struct MainMenuView: View {
     private func destinationView(for option: MenuOption) -> some View {
         switch option {
         case .startRiding:
-            ActiveTripViewTabbed()
+            ActiveTripViewTabbed(route: nil)
                 .environmentObject(DataManager.shared)
         case .planRoute:
             SwiftUI.NavigationView {

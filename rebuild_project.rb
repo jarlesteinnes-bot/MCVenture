@@ -1,3 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'securerandom'
+
+# Generate Xcode UUIDs
+def generate_uuid
+  SecureRandom.hex(12).upcase
+end
+
+# Read existing project to get current UUIDs
+project_file = 'MCVenture.xcodeproj/project.pbxproj'
+existing_content = File.read(project_file) rescue ""
+
+# Extract existing target UUID
+target_uuid = existing_content[/6E7A28B12ED07CF3000DAB69/] || generate_uuid
+
+# Create minimal valid project.pbxproj
+project_content = <<~PBXPROJ
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -6,22 +24,9 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		6E7A28F12ED07CF3000DAB69 /* Exceptions for "MCVenture" folder in "MCVenture" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 6E7A28B12ED07CF3000DAB69 /* MCVenture */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6E7A28B42ED07CF3000DAB69 /* MCVenture */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				6E7A28F12ED07CF3000DAB69 /* Exceptions for "MCVenture" folder in "MCVenture" target */,
-			);
 			path = MCVenture;
 			sourceTree = "<group>";
 		};
@@ -49,6 +54,7 @@
 		6E7A28B32ED07CF3000DAB69 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				6E7A28B22ED07CF3000DAB69 /* MCVenture.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -75,6 +81,7 @@
 			packageProductDependencies = (
 			);
 			productName = MCVenture;
+			productReference = 6E7A28B22ED07CF3000DAB69 /* MCVenture.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,10 +109,10 @@
 				da,
 			);
 			mainGroup = 6E7A28A92ED07CF3000DAB69;
+			minimumVersion = 1500;
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6E7A28B32ED07CF3000DAB69 /* Products */;
 			projectDirPath = "";
-			projectRoot = "";
 			targets = (
 				6E7A28B12ED07CF3000DAB69 /* MCVenture */,
 			);
@@ -262,9 +269,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HVLTT45S6B;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = MCVenture/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -296,9 +302,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HVLTT45S6B;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = MCVenture/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -345,3 +350,8 @@
 	};
 	rootObject = 6E7A28AA2ED07CF3000DAB69 /* Project object */;
 }
+PBXPROJ
+
+File.write(project_file, project_content)
+puts "✅ Created new valid project.pbxproj"
+PBXPROJ
