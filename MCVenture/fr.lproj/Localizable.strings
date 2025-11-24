@@ -1,0 +1,222 @@
+/* 
+   Localizable.strings (French - Français)
+   MCVenture
+*/
+
+// MARK: - Tab Bar
+"tab.routes" = "Itinéraires";
+"tab.myTrips" = "Mes Voyages";
+"tab.profile" = "Profil";
+"tab.more" = "Plus";
+
+// MARK: - Common Buttons
+"button.save" = "Enregistrer";
+"button.cancel" = "Annuler";
+"button.delete" = "Supprimer";
+"button.edit" = "Modifier";
+"button.done" = "Terminé";
+"button.back" = "Retour";
+"button.next" = "Suivant";
+"button.start" = "Démarrer";
+"button.stop" = "Arrêter";
+"button.pause" = "Pause";
+"button.resume" = "Reprendre";
+"button.share" = "Partager";
+"button.export" = "Exporter";
+"button.import" = "Importer";
+"button.add" = "Ajouter";
+"button.ok" = "OK";
+"button.close" = "Fermer";
+"button.confirm" = "Confirmer";
+
+// MARK: - Navigation & Titles
+"nav.routes" = "Itinéraires";
+"nav.myTrips" = "Mes Voyages";
+"nav.profile" = "Profil";
+"nav.settings" = "Paramètres";
+"nav.planning" = "Planification d'Itinéraire";
+"nav.navigation" = "Navigation";
+"nav.statistics" = "Statistiques";
+"nav.achievements" = "Succès";
+"nav.community" = "Communauté";
+"nav.emergency" = "Urgence";
+"nav.maintenance" = "Entretien";
+
+// MARK: - Routes
+"routes.title" = "Itinéraires";
+"routes.search" = "Rechercher des itinéraires...";
+"routes.filter" = "Filtrer";
+"routes.favorites" = "Favoris";
+"routes.nearby" = "À proximité";
+"routes.popular" = "Populaire";
+"routes.new" = "Nouvel Itinéraire";
+"routes.noResults" = "Aucun itinéraire trouvé";
+"routes.loading" = "Chargement des itinéraires...";
+"routes.distance" = "Distance";
+"routes.duration" = "Durée";
+"routes.difficulty" = "Difficulté";
+"routes.elevation" = "Altitude";
+
+// MARK: - Trips
+"trips.title" = "Mes Voyages";
+"trips.active" = "Voyage Actif";
+"trips.history" = "Historique des Voyages";
+"trips.new" = "Démarrer un Nouveau Voyage";
+"trips.end" = "Terminer le Voyage";
+"trips.noTrips" = "Aucun voyage pour le moment";
+"trips.distance" = "Distance";
+"trips.duration" = "Durée";
+"trips.speed" = "Vitesse";
+"trips.avgSpeed" = "Vitesse Moyenne";
+"trips.maxSpeed" = "Vitesse Maximale";
+"trips.startTime" = "Heure de Début";
+"trips.endTime" = "Heure de Fin";
+"trips.photos" = "Photos";
+"trips.statistics" = "Statistiques";
+
+// MARK: - Profile
+"profile.title" = "Profil";
+"profile.edit" = "Modifier le Profil";
+"profile.statistics" = "Statistiques";
+"profile.achievements" = "Succès";
+"profile.motorcycle" = "Moto";
+"profile.preferences" = "Préférences";
+"profile.totalDistance" = "Distance Totale";
+"profile.totalTrips" = "Total des Voyages";
+"profile.totalTime" = "Temps Total";
+"profile.name" = "Nom";
+"profile.email" = "Email";
+"profile.bio" = "Bio";
+
+// MARK: - Settings
+"settings.title" = "Paramètres";
+"settings.language" = "Langue";
+"settings.units" = "Unités";
+"settings.notifications" = "Notifications";
+"settings.privacy" = "Confidentialité";
+"settings.about" = "À propos";
+"settings.help" = "Aide";
+"settings.logout" = "Se Déconnecter";
+"settings.version" = "Version";
+"settings.crashDetection" = "Détection de Chute";
+"settings.offlineMode" = "Mode Hors Ligne";
+"settings.autoSync" = "Synchronisation Automatique";
+
+// MARK: - Language Picker
+"language.title" = "Sélectionner la Langue";
+"language.current" = "Langue Actuelle";
+"language.english" = "Anglais";
+"language.norwegian" = "Norvégien";
+"language.german" = "Allemand";
+"language.spanish" = "Espagnol";
+"language.french" = "Français";
+
+// MARK: - Units
+"units.metric" = "Métrique (km)";
+"units.imperial" = "Impérial (mi)";
+"units.distance" = "Distance";
+"units.speed" = "Vitesse";
+"units.elevation" = "Altitude";
+"units.km" = "km";
+"units.mi" = "mi";
+"units.kmh" = "km/h";
+"units.mph" = "mph";
+"units.meters" = "m";
+"units.feet" = "ft";
+
+// MARK: - Weather
+"weather.title" = "Météo";
+"weather.current" = "Météo Actuelle";
+"weather.forecast" = "Prévisions";
+"weather.temperature" = "Température";
+"weather.conditions" = "Conditions";
+"weather.wind" = "Vent";
+"weather.humidity" = "Humidité";
+"weather.visibility" = "Visibilité";
+
+// MARK: - Navigation
+"navigation.start" = "Démarrer la Navigation";
+"navigation.stop" = "Arrêter la Navigation";
+"navigation.reroute" = "Recalculer l'Itinéraire";
+"navigation.arrival" = "Arrivée";
+"navigation.destination" = "Destination";
+"navigation.nextTurn" = "Prochain Virage";
+"navigation.distance" = "Distance Restante";
+"navigation.time" = "Temps Restant";
+
+// MARK: - Emergency
+"emergency.title" = "Urgence";
+"emergency.sos" = "SOS d'Urgence";
+"emergency.contacts" = "Contacts d'Urgence";
+"emergency.medical" = "Informations Médicales";
+"emergency.location" = "Partager la Localisation";
+"emergency.call" = "Appel d'Urgence";
+"emergency.crashDetected" = "Chute Détectée";
+"emergency.sendAlert" = "Envoyer une Alerte";
+"emergency.cancel" = "Je vais Bien";
+
+// MARK: - Community
+"community.title" = "Communauté";
+"community.share" = "Partager l'Itinéraire";
+"community.discover" = "Découvrir";
+"community.following" = "Abonnements";
+"community.followers" = "Abonnés";
+"community.likes" = "J'aime";
+"community.comments" = "Commentaires";
+
+// MARK: - Maintenance
+"maintenance.title" = "Entretien";
+"maintenance.schedule" = "Programme d'Entretien";
+"maintenance.history" = "Historique de Service";
+"maintenance.reminders" = "Rappels";
+"maintenance.nextService" = "Prochain Service";
+"maintenance.oilChange" = "Vidange d'Huile";
+"maintenance.tireCheck" = "Vérification des Pneus";
+"maintenance.brakeInspection" = "Inspection des Freins";
+
+// MARK: - Errors & Alerts
+"error.title" = "Erreur";
+"error.unknown" = "Une erreur inconnue s'est produite";
+"error.network" = "Erreur réseau";
+"error.noConnection" = "Pas de connexion Internet";
+"error.locationPermission" = "Autorisation de localisation requise";
+"error.cameraPermission" = "Autorisation de caméra requise";
+"error.loadFailed" = "Échec du chargement des données";
+"error.saveFailed" = "Échec de l'enregistrement des données";
+"error.retry" = "Réessayer";
+
+// MARK: - Onboarding
+"onboarding.welcome" = "Bienvenue sur MCVenture";
+"onboarding.subtitle" = "Votre compagnon d'aventure moto";
+"onboarding.permissions" = "Autorisations";
+"onboarding.location" = "Services de Localisation";
+"onboarding.locationDesc" = "Suivez vos trajets et découvrez des itinéraires";
+"onboarding.camera" = "Accès à la Caméra";
+"onboarding.cameraDesc" = "Capturez des moments pendant vos voyages";
+"onboarding.notifications" = "Notifications";
+"onboarding.notificationsDesc" = "Recevez des mises à jour et des alertes de sécurité";
+"onboarding.getStarted" = "Commencer";
+
+// MARK: - Statistics
+"stats.total" = "Total";
+"stats.average" = "Moyenne";
+"stats.maximum" = "Maximum";
+"stats.this.week" = "Cette Semaine";
+"stats.this.month" = "Ce Mois";
+"stats.this.year" = "Cette Année";
+"stats.all.time" = "Depuis Toujours";
+
+// MARK: - Privacy & Legal
+"privacy.title" = "Politique de Confidentialité";
+"privacy.terms" = "Conditions d'Utilisation";
+"privacy.data" = "Vos Données";
+"privacy.permissions" = "Autorisations";
+
+// MARK: - Misc
+"loading" = "Chargement...";
+"searching" = "Recherche en cours...";
+"noData" = "Aucune donnée disponible";
+"comingSoon" = "Bientôt Disponible";
+"premium" = "Premium";
+"offline" = "Mode Hors Ligne";
+"online" = "En Ligne";

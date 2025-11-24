@@ -1,0 +1,222 @@
+/* 
+   Localizable.strings (Norwegian Bokmål)
+   MCVenture
+*/
+
+// MARK: - Tab Bar
+"tab.routes" = "Ruter";
+"tab.myTrips" = "Mine Turer";
+"tab.profile" = "Profil";
+"tab.more" = "Mer";
+
+// MARK: - Common Buttons
+"button.save" = "Lagre";
+"button.cancel" = "Avbryt";
+"button.delete" = "Slett";
+"button.edit" = "Rediger";
+"button.done" = "Ferdig";
+"button.back" = "Tilbake";
+"button.next" = "Neste";
+"button.start" = "Start";
+"button.stop" = "Stopp";
+"button.pause" = "Pause";
+"button.resume" = "Fortsett";
+"button.share" = "Del";
+"button.export" = "Eksporter";
+"button.import" = "Importer";
+"button.add" = "Legg til";
+"button.ok" = "OK";
+"button.close" = "Lukk";
+"button.confirm" = "Bekreft";
+
+// MARK: - Navigation & Titles
+"nav.routes" = "Ruter";
+"nav.myTrips" = "Mine Turer";
+"nav.profile" = "Profil";
+"nav.settings" = "Innstillinger";
+"nav.planning" = "Ruteplanlegging";
+"nav.navigation" = "Navigasjon";
+"nav.statistics" = "Statistikk";
+"nav.achievements" = "Prestasjoner";
+"nav.community" = "Samfunn";
+"nav.emergency" = "Nødsituasjon";
+"nav.maintenance" = "Vedlikehold";
+
+// MARK: - Routes
+"routes.title" = "Ruter";
+"routes.search" = "Søk ruter...";
+"routes.filter" = "Filter";
+"routes.favorites" = "Favoritter";
+"routes.nearby" = "I nærheten";
+"routes.popular" = "Populære";
+"routes.new" = "Ny Rute";
+"routes.noResults" = "Ingen ruter funnet";
+"routes.loading" = "Laster ruter...";
+"routes.distance" = "Avstand";
+"routes.duration" = "Varighet";
+"routes.difficulty" = "Vanskelighetsgrad";
+"routes.elevation" = "Høyde";
+
+// MARK: - Trips
+"trips.title" = "Mine Turer";
+"trips.active" = "Aktiv Tur";
+"trips.history" = "Turhistorikk";
+"trips.new" = "Start Ny Tur";
+"trips.end" = "Avslutt Tur";
+"trips.noTrips" = "Ingen turer ennå";
+"trips.distance" = "Avstand";
+"trips.duration" = "Varighet";
+"trips.speed" = "Hastighet";
+"trips.avgSpeed" = "Gjennomsnittsfart";
+"trips.maxSpeed" = "Maks Hastighet";
+"trips.startTime" = "Starttid";
+"trips.endTime" = "Sluttid";
+"trips.photos" = "Bilder";
+"trips.statistics" = "Statistikk";
+
+// MARK: - Profile
+"profile.title" = "Profil";
+"profile.edit" = "Rediger Profil";
+"profile.statistics" = "Statistikk";
+"profile.achievements" = "Prestasjoner";
+"profile.motorcycle" = "Motorsykkel";
+"profile.preferences" = "Innstillinger";
+"profile.totalDistance" = "Total Avstand";
+"profile.totalTrips" = "Totalt Antall Turer";
+"profile.totalTime" = "Total Tid";
+"profile.name" = "Navn";
+"profile.email" = "E-post";
+"profile.bio" = "Bio";
+
+// MARK: - Settings
+"settings.title" = "Innstillinger";
+"settings.language" = "Språk";
+"settings.units" = "Enheter";
+"settings.notifications" = "Varsler";
+"settings.privacy" = "Personvern";
+"settings.about" = "Om";
+"settings.help" = "Hjelp";
+"settings.logout" = "Logg Ut";
+"settings.version" = "Versjon";
+"settings.crashDetection" = "Krashdeteksjon";
+"settings.offlineMode" = "Frakoblet Modus";
+"settings.autoSync" = "Automatisk Synkronisering";
+
+// MARK: - Language Picker
+"language.title" = "Velg Språk";
+"language.current" = "Nåværende Språk";
+"language.english" = "Engelsk";
+"language.norwegian" = "Norsk";
+"language.german" = "Tysk";
+"language.spanish" = "Spansk";
+"language.french" = "Fransk";
+
+// MARK: - Units
+"units.metric" = "Metrisk (km)";
+"units.imperial" = "Imperial (mi)";
+"units.distance" = "Avstand";
+"units.speed" = "Hastighet";
+"units.elevation" = "Høyde";
+"units.km" = "km";
+"units.mi" = "mi";
+"units.kmh" = "km/t";
+"units.mph" = "mph";
+"units.meters" = "m";
+"units.feet" = "ft";
+
+// MARK: - Weather
+"weather.title" = "Vær";
+"weather.current" = "Nåværende Vær";
+"weather.forecast" = "Værvarsel";
+"weather.temperature" = "Temperatur";
+"weather.conditions" = "Forhold";
+"weather.wind" = "Vind";
+"weather.humidity" = "Fuktighet";
+"weather.visibility" = "Sikt";
+
+// MARK: - Navigation
+"navigation.start" = "Start Navigasjon";
+"navigation.stop" = "Stopp Navigasjon";
+"navigation.reroute" = "Omdirigering";
+"navigation.arrival" = "Ankomst";
+"navigation.destination" = "Destinasjon";
+"navigation.nextTurn" = "Neste Sving";
+"navigation.distance" = "Gjenværende Avstand";
+"navigation.time" = "Gjenværende Tid";
+
+// MARK: - Emergency
+"emergency.title" = "Nødsituasjon";
+"emergency.sos" = "Nød-SOS";
+"emergency.contacts" = "Nødkontakter";
+"emergency.medical" = "Medisinsk Info";
+"emergency.location" = "Del Posisjon";
+"emergency.call" = "Nødanrop";
+"emergency.crashDetected" = "Krasj Oppdaget";
+"emergency.sendAlert" = "Send Varsel";
+"emergency.cancel" = "Jeg er OK";
+
+// MARK: - Community
+"community.title" = "Samfunn";
+"community.share" = "Del Rute";
+"community.discover" = "Oppdag";
+"community.following" = "Følger";
+"community.followers" = "Følgere";
+"community.likes" = "Liker";
+"community.comments" = "Kommentarer";
+
+// MARK: - Maintenance
+"maintenance.title" = "Vedlikehold";
+"maintenance.schedule" = "Vedlikeholdsplan";
+"maintenance.history" = "Servicehistorikk";
+"maintenance.reminders" = "Påminnelser";
+"maintenance.nextService" = "Neste Service";
+"maintenance.oilChange" = "Oljeskift";
+"maintenance.tireCheck" = "Dekksjekk";
+"maintenance.brakeInspection" = "Bremseinspeksjon";
+
+// MARK: - Errors & Alerts
+"error.title" = "Feil";
+"error.unknown" = "En ukjent feil oppstod";
+"error.network" = "Nettverksfeil";
+"error.noConnection" = "Ingen internettforbindelse";
+"error.locationPermission" = "Posisjonstillatelse påkrevd";
+"error.cameraPermission" = "Kameratillatelse påkrevd";
+"error.loadFailed" = "Kunne ikke laste data";
+"error.saveFailed" = "Kunne ikke lagre data";
+"error.retry" = "Prøv Igjen";
+
+// MARK: - Onboarding
+"onboarding.welcome" = "Velkommen til MCVenture";
+"onboarding.subtitle" = "Din motorsykkelventureledsager";
+"onboarding.permissions" = "Tillatelser";
+"onboarding.location" = "Posisjonstjenester";
+"onboarding.locationDesc" = "Spor turene dine og oppdag ruter";
+"onboarding.camera" = "Kameratilgang";
+"onboarding.cameraDesc" = "Ta bilder under turene dine";
+"onboarding.notifications" = "Varsler";
+"onboarding.notificationsDesc" = "Få tureoppdateringer og sikkerhetsvarsler";
+"onboarding.getStarted" = "Kom i Gang";
+
+// MARK: - Statistics
+"stats.total" = "Total";
+"stats.average" = "Gjennomsnitt";
+"stats.maximum" = "Maksimum";
+"stats.this.week" = "Denne Uken";
+"stats.this.month" = "Denne Måneden";
+"stats.this.year" = "Dette Året";
+"stats.all.time" = "Alle Tider";
+
+// MARK: - Privacy & Legal
+"privacy.title" = "Personvernerklæring";
+"privacy.terms" = "Vilkår for Bruk";
+"privacy.data" = "Dine Data";
+"privacy.permissions" = "Tillatelser";
+
+// MARK: - Misc
+"loading" = "Laster...";
+"searching" = "Søker...";
+"noData" = "Ingen data tilgjengelig";
+"comingSoon" = "Kommer Snart";
+"premium" = "Premium";
+"offline" = "Frakoblet Modus";
+"online" = "Tilkoblet";

@@ -1,0 +1,222 @@
+/* 
+   Localizable.strings (German - Deutsch)
+   MCVenture
+*/
+
+// MARK: - Tab Bar
+"tab.routes" = "Routen";
+"tab.myTrips" = "Meine Touren";
+"tab.profile" = "Profil";
+"tab.more" = "Mehr";
+
+// MARK: - Common Buttons
+"button.save" = "Speichern";
+"button.cancel" = "Abbrechen";
+"button.delete" = "Löschen";
+"button.edit" = "Bearbeiten";
+"button.done" = "Fertig";
+"button.back" = "Zurück";
+"button.next" = "Weiter";
+"button.start" = "Start";
+"button.stop" = "Stopp";
+"button.pause" = "Pause";
+"button.resume" = "Fortsetzen";
+"button.share" = "Teilen";
+"button.export" = "Exportieren";
+"button.import" = "Importieren";
+"button.add" = "Hinzufügen";
+"button.ok" = "OK";
+"button.close" = "Schließen";
+"button.confirm" = "Bestätigen";
+
+// MARK: - Navigation & Titles
+"nav.routes" = "Routen";
+"nav.myTrips" = "Meine Touren";
+"nav.profile" = "Profil";
+"nav.settings" = "Einstellungen";
+"nav.planning" = "Routenplanung";
+"nav.navigation" = "Navigation";
+"nav.statistics" = "Statistiken";
+"nav.achievements" = "Erfolge";
+"nav.community" = "Community";
+"nav.emergency" = "Notfall";
+"nav.maintenance" = "Wartung";
+
+// MARK: - Routes
+"routes.title" = "Routen";
+"routes.search" = "Routen suchen...";
+"routes.filter" = "Filter";
+"routes.favorites" = "Favoriten";
+"routes.nearby" = "In der Nähe";
+"routes.popular" = "Beliebt";
+"routes.new" = "Neue Route";
+"routes.noResults" = "Keine Routen gefunden";
+"routes.loading" = "Routen werden geladen...";
+"routes.distance" = "Entfernung";
+"routes.duration" = "Dauer";
+"routes.difficulty" = "Schwierigkeit";
+"routes.elevation" = "Höhe";
+
+// MARK: - Trips
+"trips.title" = "Meine Touren";
+"trips.active" = "Aktive Tour";
+"trips.history" = "Tourenhistorie";
+"trips.new" = "Neue Tour starten";
+"trips.end" = "Tour beenden";
+"trips.noTrips" = "Noch keine Touren";
+"trips.distance" = "Entfernung";
+"trips.duration" = "Dauer";
+"trips.speed" = "Geschwindigkeit";
+"trips.avgSpeed" = "Durchschnittsgeschwindigkeit";
+"trips.maxSpeed" = "Höchstgeschwindigkeit";
+"trips.startTime" = "Startzeit";
+"trips.endTime" = "Endzeit";
+"trips.photos" = "Fotos";
+"trips.statistics" = "Statistiken";
+
+// MARK: - Profile
+"profile.title" = "Profil";
+"profile.edit" = "Profil bearbeiten";
+"profile.statistics" = "Statistiken";
+"profile.achievements" = "Erfolge";
+"profile.motorcycle" = "Motorrad";
+"profile.preferences" = "Einstellungen";
+"profile.totalDistance" = "Gesamtdistanz";
+"profile.totalTrips" = "Gesamte Touren";
+"profile.totalTime" = "Gesamtzeit";
+"profile.name" = "Name";
+"profile.email" = "E-Mail";
+"profile.bio" = "Bio";
+
+// MARK: - Settings
+"settings.title" = "Einstellungen";
+"settings.language" = "Sprache";
+"settings.units" = "Einheiten";
+"settings.notifications" = "Benachrichtigungen";
+"settings.privacy" = "Datenschutz";
+"settings.about" = "Über";
+"settings.help" = "Hilfe";
+"settings.logout" = "Abmelden";
+"settings.version" = "Version";
+"settings.crashDetection" = "Sturzerkennung";
+"settings.offlineMode" = "Offline-Modus";
+"settings.autoSync" = "Auto-Synchronisation";
+
+// MARK: - Language Picker
+"language.title" = "Sprache wählen";
+"language.current" = "Aktuelle Sprache";
+"language.english" = "Englisch";
+"language.norwegian" = "Norwegisch";
+"language.german" = "Deutsch";
+"language.spanish" = "Spanisch";
+"language.french" = "Französisch";
+
+// MARK: - Units
+"units.metric" = "Metrisch (km)";
+"units.imperial" = "Imperial (mi)";
+"units.distance" = "Entfernung";
+"units.speed" = "Geschwindigkeit";
+"units.elevation" = "Höhe";
+"units.km" = "km";
+"units.mi" = "mi";
+"units.kmh" = "km/h";
+"units.mph" = "mph";
+"units.meters" = "m";
+"units.feet" = "ft";
+
+// MARK: - Weather
+"weather.title" = "Wetter";
+"weather.current" = "Aktuelles Wetter";
+"weather.forecast" = "Vorhersage";
+"weather.temperature" = "Temperatur";
+"weather.conditions" = "Bedingungen";
+"weather.wind" = "Wind";
+"weather.humidity" = "Luftfeuchtigkeit";
+"weather.visibility" = "Sicht";
+
+// MARK: - Navigation
+"navigation.start" = "Navigation starten";
+"navigation.stop" = "Navigation stoppen";
+"navigation.reroute" = "Umleitung";
+"navigation.arrival" = "Ankunft";
+"navigation.destination" = "Ziel";
+"navigation.nextTurn" = "Nächste Abbiegung";
+"navigation.distance" = "Verbleibende Entfernung";
+"navigation.time" = "Verbleibende Zeit";
+
+// MARK: - Emergency
+"emergency.title" = "Notfall";
+"emergency.sos" = "Notfall-SOS";
+"emergency.contacts" = "Notfallkontakte";
+"emergency.medical" = "Medizinische Informationen";
+"emergency.location" = "Standort teilen";
+"emergency.call" = "Notruf";
+"emergency.crashDetected" = "Sturz erkannt";
+"emergency.sendAlert" = "Alarm senden";
+"emergency.cancel" = "Mir geht's gut";
+
+// MARK: - Community
+"community.title" = "Community";
+"community.share" = "Route teilen";
+"community.discover" = "Entdecken";
+"community.following" = "Folge ich";
+"community.followers" = "Follower";
+"community.likes" = "Gefällt mir";
+"community.comments" = "Kommentare";
+
+// MARK: - Maintenance
+"maintenance.title" = "Wartung";
+"maintenance.schedule" = "Wartungsplan";
+"maintenance.history" = "Servicehistorie";
+"maintenance.reminders" = "Erinnerungen";
+"maintenance.nextService" = "Nächster Service";
+"maintenance.oilChange" = "Ölwechsel";
+"maintenance.tireCheck" = "Reifenprüfung";
+"maintenance.brakeInspection" = "Bremsenkontrolle";
+
+// MARK: - Errors & Alerts
+"error.title" = "Fehler";
+"error.unknown" = "Ein unbekannter Fehler ist aufgetreten";
+"error.network" = "Netzwerkfehler";
+"error.noConnection" = "Keine Internetverbindung";
+"error.locationPermission" = "Standortberechtigung erforderlich";
+"error.cameraPermission" = "Kameraberechtigung erforderlich";
+"error.loadFailed" = "Laden der Daten fehlgeschlagen";
+"error.saveFailed" = "Speichern der Daten fehlgeschlagen";
+"error.retry" = "Wiederholen";
+
+// MARK: - Onboarding
+"onboarding.welcome" = "Willkommen bei MCVenture";
+"onboarding.subtitle" = "Dein Motorrad-Abenteuer-Begleiter";
+"onboarding.permissions" = "Berechtigungen";
+"onboarding.location" = "Ortungsdienste";
+"onboarding.locationDesc" = "Verfolge deine Fahrten und entdecke Routen";
+"onboarding.camera" = "Kamerazugriff";
+"onboarding.cameraDesc" = "Halte Momente während deiner Touren fest";
+"onboarding.notifications" = "Benachrichtigungen";
+"onboarding.notificationsDesc" = "Erhalte Fahrt-Updates und Sicherheitswarnungen";
+"onboarding.getStarted" = "Los geht's";
+
+// MARK: - Statistics
+"stats.total" = "Gesamt";
+"stats.average" = "Durchschnitt";
+"stats.maximum" = "Maximum";
+"stats.this.week" = "Diese Woche";
+"stats.this.month" = "Dieser Monat";
+"stats.this.year" = "Dieses Jahr";
+"stats.all.time" = "Gesamtzeit";
+
+// MARK: - Privacy & Legal
+"privacy.title" = "Datenschutzerklärung";
+"privacy.terms" = "Nutzungsbedingungen";
+"privacy.data" = "Deine Daten";
+"privacy.permissions" = "Berechtigungen";
+
+// MARK: - Misc
+"loading" = "Wird geladen...";
+"searching" = "Suche läuft...";
+"noData" = "Keine Daten verfügbar";
+"comingSoon" = "Demnächst";
+"premium" = "Premium";
+"offline" = "Offline-Modus";
+"online" = "Online";

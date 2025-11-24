@@ -1,0 +1,628 @@
+//
+//  SettingsView.swift
+//  MCVenture
+//
+//  Created by BNTF on 23/11/2025.
+//
+
+import SwiftUI
+import Combine
+
+struct AppSettings: Codable {
+    var distanceUnit: DistanceUnit = .kilometers
+    var temperatureUnit: TemperatureUnit = .celsius
+    var fuelUnit: FuelUnit = .liters
+    var theme: AppTheme = .auto
+    var notificationsEnabled: Bool = true
+    var fuelWarningsEnabled: Bool = true
+    var weatherAlertsEnabled: Bool = true
+    var crashDetectionEnabled: Bool = true
+    var hapticsEnabled: Bool = true
+    var autoDownloadRoutes: Bool = false
+    var autoPauseEnabled: Bool = true
+    var voiceAnnouncementsEnabled: Bool = true
+    
+    enum DistanceUnit: String, Codable, CaseIterable {
+        case kilometers = "Kilometers (km)"
+        case miles = "Miles (mi)"
+        
+        func convert(_ km: Double) -> Double {
+            switch self {
+            case .kilometers: return km
+            case .miles: return km * 0.621371
+            }
+        }
+    }
+    
+    enum TemperatureUnit: String, Codable, CaseIterable {
+        case celsius = "Celsius (°C)"
+        case fahrenheit = "Fahrenheit (°F)"
+        
+        func convert(_ celsius: Double) -> Double {
+            switch self {
+            case .celsius: return celsius
+            case .fahrenheit: return (celsius * 9/5) + 32
+            }
+        }
+    }
+    
+    enum FuelUnit: String, Codable, CaseIterable {
+        case liters = "Liters (L)"
+        case gallons = "Gallons (gal)"
+        
+        func convert(_ liters: Double) -> Double {
+            switch self {
+            case .liters: return liters
+            case .gallons: return liters * 0.264172
+            }
+        }
+    }
+    
+    enum AppTheme: String, Codable, CaseIterable {
+        case light = "Light"
+        case dark = "Dark"
+        case auto = "Auto"
+    }
+}
+
+class AppSettingsManager: ObservableObject {
+    static let shared = AppSettingsManager()
+    
+    @Published var settings: AppSettings {
+        didSet {
+            saveSettings()
+        }
+    }
+    
+    private let settingsKey = "appSettings"
+    
+    init() {
+        if let data = UserDefaults.standard.data(forKey: settingsKey),
+           let decoded = try? JSONDecoder().decode(AppSettings.self, from: data) {
+            self.settings = decoded
+        } else {
+            self.settings = AppSettings()
+        }
+    }
+    
+    private func saveSettings() {
+        if let encoded = try? JSONEncoder().encode(settings) {
+            UserDefaults.standard.set(encoded, forKey: settingsKey)
+        }
+    }
+    
+    func clearAllData() {
+        // Clear routes
+        if let routesData = UserDefaults.standard.data(forKey: "scrapedRoutes") {
+            UserDefaults.standard.removeObject(forKey: "scrapedRoutes")
+        }
+        
+        // Clear trip history
+        if let tripsData = UserDefaults.standard.data(forKey: "completedTrips") {
+            UserDefaults.standard.removeObject(forKey: "completedTrips")
+        }
+        
+        // Clear cache
+        let cacheSize = getCacheSize()
+        print("Cleared \(cacheSize / 1_000_000) MB of cache")
+    }
+    
+    func getCacheSize() -> Int64 {
+        var totalSize: Int64 = 0
+        
+        let fileManager = FileManager.default
+        let cacheDirectory = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first!
+        
+        if let files = try? fileManager.contentsOfDirectory(at: cacheDirectory, includingPropertiesForKeys: [.fileSizeKey], options: []) {
+            for file in files {
+                if let size = try? file.resourceValues(forKeys: [.fileSizeKey]).fileSize {
+                    totalSize += Int64(size)
+                }
+            }
+        }
+        
+        return totalSize
+    }
+    
+    func exportUserData() -> URL? {
+        let data: [String: Any] = [
+            "routes": UserDefaults.standard.data(forKey: "scrapedRoutes") ?? Data(),
+            "trips": UserDefaults.standard.data(forKey: "completedTrips") ?? Data(),
+            "profile": UserDefaults.standard.data(forKey: "userProfile") ?? Data(),
+            "motorcycles": UserDefaults.standard.data(forKey: "motorcycles") ?? Data(),
+            "emergency_contacts": UserDefaults.standard.data(forKey: "emergencyContacts") ?? Data(),
+            "settings": UserDefaults.standard.data(forKey: settingsKey) ?? Data()
+        ]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: data)
+        
+        let tempDirectory = FileManager.default.temporaryDirectory
+        let fileURL = tempDirectory.appendingPathComponent("MCVenture_Backup_\(Date().timeIntervalSince1970).json")
+        
+        try? jsonData?.write(to: fileURL)
+        return fileURL
+    }
+}
+
+struct SettingsView: View {
+    @StateObject private var settingsManager = AppSettingsManager.shared
+    @StateObject private var emergencyManager = EmergencyManager.shared
+    @StateObject private var networkMonitor = NetworkMonitor.shared
+    @State private var userPrefs = UserPreferences.shared
+    
+    @State private var showClearDataAlert = false
+    @State private var showExportSheet = false
+    @State private var exportURL: URL?
+    @State private var showEmergencyContactsSheet = false
+    @State private var showMedicalInfoSheet = false
+    
+    var body: some View {
+        // NavigationView {
+            Form {
+                // MARK: - Units Section
+                Section(header: Text("Units")) {
+                    Picker("Distance", selection: Binding(
+                        get: { userPrefs.distanceUnit },
+                        set: { newValue in
+                            userPrefs.distanceUnit = newValue
+                            settingsManager.settings.distanceUnit = (newValue == .kilometers) ? .kilometers : .miles
+                            HapticFeedbackManager.shared.selection()
+                        }
+                    )) {
+                        ForEach(DistanceUnit.allCases, id: \.self) { unit in
+                            Text(unit.displayName).tag(unit)
+                        }
+                    }
+                    
+                    Picker("Temperature", selection: Binding(
+                        get: { userPrefs.temperatureUnit },
+                        set: { newValue in
+                            userPrefs.temperatureUnit = newValue
+                            settingsManager.settings.temperatureUnit = (newValue == .celsius) ? .celsius : .fahrenheit
+                            HapticFeedbackManager.shared.selection()
+                        }
+                    )) {
+                        ForEach(TemperatureUnit.allCases, id: \.self) { unit in
+                            Text(unit.displayName).tag(unit)
+                        }
+                    }
+                    
+                    Picker("Fuel", selection: $settingsManager.settings.fuelUnit) {
+                        ForEach(AppSettings.FuelUnit.allCases, id: \.self) { unit in
+                            Text(unit.rawValue).tag(unit)
+                        }
+                    }
+                    .onChange(of: settingsManager.settings.fuelUnit) { _ in
+                        HapticFeedbackManager.shared.selection()
+                    }
+                    
+                    // Quick reference examples
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Quick Reference")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        HStack(spacing: 6) {
+                            Text("100 km")
+                                .font(.caption2)
+                            Image(systemName: "arrow.right")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                            Text(userPrefs.formatDistance(100))
+                                .font(.caption2)
+                                .fontWeight(.semibold)
+                        }
+                        
+                        HStack(spacing: 6) {
+                            Text("20°C")
+                                .font(.caption2)
+                            Image(systemName: "arrow.right")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                            Text(userPrefs.formatTemperature(20))
+                                .font(.caption2)
+                                .fontWeight(.semibold)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                }
+                
+                // MARK: - Appearance Section
+                Section(header: Text("Appearance")) {
+                    Picker("Theme", selection: $settingsManager.settings.theme) {
+                        ForEach(AppSettings.AppTheme.allCases, id: \.self) { theme in
+                            Text(theme.rawValue).tag(theme)
+                        }
+                    }
+                    
+                    Toggle("Haptic Feedback", isOn: $settingsManager.settings.hapticsEnabled)
+                }
+                
+                // MARK: - Notifications Section
+                Section(header: Text("Notifications & Alerts")) {
+                    Toggle("Enable Notifications", isOn: $settingsManager.settings.notificationsEnabled)
+                    
+                    Toggle("Fuel Warnings", isOn: $settingsManager.settings.fuelWarningsEnabled)
+                        .disabled(!settingsManager.settings.notificationsEnabled)
+                    
+                    Toggle("Weather Alerts", isOn: $settingsManager.settings.weatherAlertsEnabled)
+                        .disabled(!settingsManager.settings.notificationsEnabled)
+                }
+                
+                // MARK: - Trip Behavior Section
+                Section(header: Text("Trip Behavior")) {
+                    Toggle("Auto-Pause When Stopped", isOn: $settingsManager.settings.autoPauseEnabled)
+                        .onChange(of: settingsManager.settings.autoPauseEnabled) { newValue in
+                            GPSTrackingManager.shared.autoPauseEnabled = newValue
+                            HapticFeedbackManager.shared.selection()
+                        }
+                    
+                    Toggle("Voice Announcements", isOn: $settingsManager.settings.voiceAnnouncementsEnabled)
+                        .onChange(of: settingsManager.settings.voiceAnnouncementsEnabled) { newValue in
+                            // VoiceAnnouncer will check this setting
+                            HapticFeedbackManager.shared.selection()
+                        }
+                }
+                
+                // MARK: - Safety Section
+                Section(header: Text("Safety")) {
+                    Toggle("Crash Detection", isOn: $settingsManager.settings.crashDetectionEnabled)
+                    
+                    Button(action: {
+                        showEmergencyContactsSheet = true
+                    }) {
+                        HStack {
+                            Image(systemName: "person.2.fill")
+                                .foregroundColor(.orange)
+                            Text("Emergency Contacts")
+                            Spacer()
+                            Text("\(emergencyManager.emergencyContacts.count)")
+                                .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    Button(action: {
+                        showMedicalInfoSheet = true
+                    }) {
+                        HStack {
+                            Image(systemName: "cross.case.fill")
+                                .foregroundColor(.red)
+                            Text("Medical Information")
+                            Spacer()
+                            if !emergencyManager.medicalInfo.bloodType.isEmpty {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.green)
+                            }
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                
+                // MARK: - Data & Storage Section
+                Section(header: Text("Data & Storage")) {
+                    Toggle("Auto-Download Routes", isOn: $settingsManager.settings.autoDownloadRoutes)
+                    
+                    HStack {
+                        Image(systemName: "externaldrive.fill")
+                        Text("Cache Size")
+                        Spacer()
+                        Text("\(settingsManager.getCacheSize() / 1_000_000) MB")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    HStack {
+                        Image(systemName: networkMonitor.connectionType.icon)
+                            .foregroundColor(networkMonitor.isConnected ? .green : .red)
+                        Text("Connection")
+                        Spacer()
+                        Text(networkMonitor.isConnected ? networkMonitor.connectionType.description : "Offline")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Button(action: {
+                        if let url = settingsManager.exportUserData() {
+                            exportURL = url
+                            showExportSheet = true
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "square.and.arrow.up")
+                            Text("Export All Data")
+                        }
+                    }
+                    
+                    Button(action: {
+                        showClearDataAlert = true
+                    }) {
+                        HStack {
+                            Image(systemName: "trash")
+                                .foregroundColor(.red)
+                            Text("Clear All Data")
+                                .foregroundColor(.red)
+                        }
+                    }
+                }
+                
+                // MARK: - Privacy Section
+                Section(header: Text("Legal & Privacy")) {
+                    NavigationLink(destination: PrivacyPolicyView()) {
+                        HStack {
+                            Image(systemName: "hand.raised.fill")
+                                .foregroundColor(.blue)
+                            Text("Privacy Policy")
+                        }
+                    }
+                    
+                    Link(destination: URL(string: "https://mcventure.com/terms")!) {
+                        HStack {
+                            Image(systemName: "doc.text.fill")
+                                .foregroundColor(.blue)
+                            Text("Terms of Service")
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    Text("MCVenture respects your privacy. All GPS data is stored locally on your device. Emergency contacts are encrypted and only shared when you activate SOS.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .padding(.vertical, 4)
+                }
+                
+                // MARK: - About Section
+                Section(header: Text("About")) {
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    HStack {
+                        Text("Build")
+                        Spacer()
+                        Text(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Button(action: {
+                        ReviewRequestManager.shared.requestReviewManually()
+                    }) {
+                        HStack {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.orange)
+                            Text("Rate MCVenture")
+                        }
+                    }
+                    
+                    Link(destination: URL(string: "https://mcventure.com")!) {
+                        HStack {
+                            Image(systemName: "link")
+                                .foregroundColor(.blue)
+                            Text("Website")
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    Link(destination: URL(string: "mailto:support@mcventure.com")!) {
+                        HStack {
+                            Image(systemName: "envelope.fill")
+                                .foregroundColor(.blue)
+                            Text("Contact Support")
+                            Spacer()
+                            Image(systemName: "arrow.up.right")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Settings")
+            .alert("Clear All Data?", isPresented: $showClearDataAlert) {
+                Button("Cancel", role: .cancel) { }
+                Button("Clear", role: .destructive) {
+                    settingsManager.clearAllData()
+                }
+            } message: {
+                Text("This will permanently delete all routes, trips, and cached data. This action cannot be undone.")
+            }
+            .sheet(isPresented: $showExportSheet) {
+                if let url = exportURL {
+                    AppShareSheet(items: [url])
+                }
+            }
+                .sheet(isPresented: $showEmergencyContactsSheet) {
+                AppEmergencyContactsView()
+            }
+            .sheet(isPresented: $showMedicalInfoSheet) {
+                AppMedicalInfoView()
+            }
+        }
+    }
+}
+
+// MARK: - App Emergency Contacts View
+struct AppEmergencyContactsView: View {
+    @StateObject private var emergencyManager = EmergencyManager.shared
+    @Environment(\.dismiss) var dismiss
+    @State private var showAddContact = false
+    
+    var body: some View {
+        // NavigationView {
+            List {
+                ForEach(emergencyManager.emergencyContacts) { contact in
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text(contact.name)
+                            .font(.headline)
+                        Text(contact.phone)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        Text(contact.relationship)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        if contact.isPrimary {
+                            Text("Primary Contact")
+                                .font(.caption)
+                                .foregroundColor(.orange)
+                        }
+                    }
+                }
+                .onDelete { indexSet in
+                    indexSet.forEach { emergencyManager.removeEmergencyContact(at: $0) }
+                }
+            }
+            .navigationTitle("Emergency Contacts")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { showAddContact = true }) {
+                        Image(systemName: "plus")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Done") { dismiss() }
+                }
+            }
+            .sheet(isPresented: $showAddContact) {
+                AppAddEmergencyContactView()
+            }
+        }
+    }
+}
+
+// MARK: - App Add Emergency Contact View
+struct AppAddEmergencyContactView: View {
+    @StateObject private var emergencyManager = EmergencyManager.shared
+    @Environment(\.dismiss) var dismiss
+    
+    @State private var name = ""
+    @State private var phone = ""
+    @State private var relationship = ""
+    @State private var isPrimary = false
+    
+    var body: some View {
+        // NavigationView {
+            Form {
+                TextField("Name", text: $name)
+                TextField("Phone Number", text: $phone)
+                    .keyboardType(.phonePad)
+                TextField("Relationship", text: $relationship)
+                Toggle("Primary Contact", isOn: $isPrimary)
+            }
+            .navigationTitle("Add Contact")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        let contact = EmergencyContact(
+                            id: UUID(),
+                            name: name,
+                            phone: phone,
+                            relationship: relationship,
+                            isPrimary: isPrimary
+                        )
+                        emergencyManager.addEmergencyContact(contact)
+                        dismiss()
+                    }
+                    .disabled(name.isEmpty || phone.isEmpty)
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") { dismiss() }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - App Medical Info View
+struct AppMedicalInfoView: View {
+    @StateObject private var emergencyManager = EmergencyManager.shared
+    @Environment(\.dismiss) var dismiss
+    
+    @State private var bloodType = ""
+    @State private var allergies = ""
+    @State private var medications = ""
+    @State private var conditions = ""
+    @State private var insuranceProvider = ""
+    @State private var insurancePolicyNumber = ""
+    @State private var doctorName = ""
+    @State private var doctorPhone = ""
+    
+    var body: some View {
+        // NavigationView {
+            Form {
+                Section(header: Text("Basic Info")) {
+                    TextField("Blood Type (e.g., A+)", text: $bloodType)
+                    TextField("Allergies (comma separated)", text: $allergies)
+                    TextField("Medications (comma separated)", text: $medications)
+                    TextField("Medical Conditions (comma separated)", text: $conditions)
+                }
+                
+                Section(header: Text("Insurance")) {
+                    TextField("Insurance Provider", text: $insuranceProvider)
+                    TextField("Policy Number", text: $insurancePolicyNumber)
+                }
+                
+                Section(header: Text("Doctor")) {
+                    TextField("Doctor Name", text: $doctorName)
+                    TextField("Doctor Phone", text: $doctorPhone)
+                        .keyboardType(.phonePad)
+                }
+            }
+            .navigationTitle("Medical Information")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        emergencyManager.medicalInfo = MedicalInfo(
+                            bloodType: bloodType,
+                            allergies: allergies.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) },
+                            medications: medications.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) },
+                            medicalConditions: conditions.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) },
+                            insuranceProvider: insuranceProvider,
+                            insurancePolicyNumber: insurancePolicyNumber,
+                            doctorName: doctorName,
+                            doctorPhone: doctorPhone
+                        )
+                        emergencyManager.saveEmergencyData()
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") { dismiss() }
+                }
+            }
+            .onAppear {
+                let info = emergencyManager.medicalInfo
+                bloodType = info.bloodType
+                allergies = info.allergies.joined(separator: ", ")
+                medications = info.medications.joined(separator: ", ")
+                conditions = info.medicalConditions.joined(separator: ", ")
+                insuranceProvider = info.insuranceProvider
+                insurancePolicyNumber = info.insurancePolicyNumber
+                doctorName = info.doctorName
+                doctorPhone = info.doctorPhone
+            }
+        }
+    }
+}
+
+// MARK: - App Share Sheet
+struct AppShareSheet: UIViewControllerRepresentable {
+    let items: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: items, applicationActivities: nil)
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
+#Preview {
+    SettingsView()
+}

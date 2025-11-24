@@ -1,0 +1,222 @@
+/* 
+   Localizable.strings (English - Base Language)
+   MCVenture
+*/
+
+// MARK: - Tab Bar
+"tab.routes" = "Routes";
+"tab.myTrips" = "My Trips";
+"tab.profile" = "Profile";
+"tab.more" = "More";
+
+// MARK: - Common Buttons
+"button.save" = "Save";
+"button.cancel" = "Cancel";
+"button.delete" = "Delete";
+"button.edit" = "Edit";
+"button.done" = "Done";
+"button.back" = "Back";
+"button.next" = "Next";
+"button.start" = "Start";
+"button.stop" = "Stop";
+"button.pause" = "Pause";
+"button.resume" = "Resume";
+"button.share" = "Share";
+"button.export" = "Export";
+"button.import" = "Import";
+"button.add" = "Add";
+"button.ok" = "OK";
+"button.close" = "Close";
+"button.confirm" = "Confirm";
+
+// MARK: - Navigation & Titles
+"nav.routes" = "Routes";
+"nav.myTrips" = "My Trips";
+"nav.profile" = "Profile";
+"nav.settings" = "Settings";
+"nav.planning" = "Route Planning";
+"nav.navigation" = "Navigation";
+"nav.statistics" = "Statistics";
+"nav.achievements" = "Achievements";
+"nav.community" = "Community";
+"nav.emergency" = "Emergency";
+"nav.maintenance" = "Maintenance";
+
+// MARK: - Routes
+"routes.title" = "Routes";
+"routes.search" = "Search routes...";
+"routes.filter" = "Filter";
+"routes.favorites" = "Favorites";
+"routes.nearby" = "Nearby";
+"routes.popular" = "Popular";
+"routes.new" = "New Route";
+"routes.noResults" = "No routes found";
+"routes.loading" = "Loading routes...";
+"routes.distance" = "Distance";
+"routes.duration" = "Duration";
+"routes.difficulty" = "Difficulty";
+"routes.elevation" = "Elevation";
+
+// MARK: - Trips
+"trips.title" = "My Trips";
+"trips.active" = "Active Trip";
+"trips.history" = "Trip History";
+"trips.new" = "Start New Trip";
+"trips.end" = "End Trip";
+"trips.noTrips" = "No trips yet";
+"trips.distance" = "Distance";
+"trips.duration" = "Duration";
+"trips.speed" = "Speed";
+"trips.avgSpeed" = "Avg Speed";
+"trips.maxSpeed" = "Max Speed";
+"trips.startTime" = "Start Time";
+"trips.endTime" = "End Time";
+"trips.photos" = "Photos";
+"trips.statistics" = "Statistics";
+
+// MARK: - Profile
+"profile.title" = "Profile";
+"profile.edit" = "Edit Profile";
+"profile.statistics" = "Statistics";
+"profile.achievements" = "Achievements";
+"profile.motorcycle" = "Motorcycle";
+"profile.preferences" = "Preferences";
+"profile.totalDistance" = "Total Distance";
+"profile.totalTrips" = "Total Trips";
+"profile.totalTime" = "Total Time";
+"profile.name" = "Name";
+"profile.email" = "Email";
+"profile.bio" = "Bio";
+
+// MARK: - Settings
+"settings.title" = "Settings";
+"settings.language" = "Language";
+"settings.units" = "Units";
+"settings.notifications" = "Notifications";
+"settings.privacy" = "Privacy";
+"settings.about" = "About";
+"settings.help" = "Help";
+"settings.logout" = "Log Out";
+"settings.version" = "Version";
+"settings.crashDetection" = "Crash Detection";
+"settings.offlineMode" = "Offline Mode";
+"settings.autoSync" = "Auto Sync";
+
+// MARK: - Language Picker
+"language.title" = "Select Language";
+"language.current" = "Current Language";
+"language.english" = "English";
+"language.norwegian" = "Norwegian";
+"language.german" = "German";
+"language.spanish" = "Spanish";
+"language.french" = "French";
+
+// MARK: - Units
+"units.metric" = "Metric (km)";
+"units.imperial" = "Imperial (mi)";
+"units.distance" = "Distance";
+"units.speed" = "Speed";
+"units.elevation" = "Elevation";
+"units.km" = "km";
+"units.mi" = "mi";
+"units.kmh" = "km/h";
+"units.mph" = "mph";
+"units.meters" = "m";
+"units.feet" = "ft";
+
+// MARK: - Weather
+"weather.title" = "Weather";
+"weather.current" = "Current Weather";
+"weather.forecast" = "Forecast";
+"weather.temperature" = "Temperature";
+"weather.conditions" = "Conditions";
+"weather.wind" = "Wind";
+"weather.humidity" = "Humidity";
+"weather.visibility" = "Visibility";
+
+// MARK: - Navigation
+"navigation.start" = "Start Navigation";
+"navigation.stop" = "Stop Navigation";
+"navigation.reroute" = "Reroute";
+"navigation.arrival" = "Arrival";
+"navigation.destination" = "Destination";
+"navigation.nextTurn" = "Next Turn";
+"navigation.distance" = "Distance Remaining";
+"navigation.time" = "Time Remaining";
+
+// MARK: - Emergency
+"emergency.title" = "Emergency";
+"emergency.sos" = "Emergency SOS";
+"emergency.contacts" = "Emergency Contacts";
+"emergency.medical" = "Medical Info";
+"emergency.location" = "Share Location";
+"emergency.call" = "Emergency Call";
+"emergency.crashDetected" = "Crash Detected";
+"emergency.sendAlert" = "Send Alert";
+"emergency.cancel" = "I'm OK";
+
+// MARK: - Community
+"community.title" = "Community";
+"community.share" = "Share Route";
+"community.discover" = "Discover";
+"community.following" = "Following";
+"community.followers" = "Followers";
+"community.likes" = "Likes";
+"community.comments" = "Comments";
+
+// MARK: - Maintenance
+"maintenance.title" = "Maintenance";
+"maintenance.schedule" = "Maintenance Schedule";
+"maintenance.history" = "Service History";
+"maintenance.reminders" = "Reminders";
+"maintenance.nextService" = "Next Service";
+"maintenance.oilChange" = "Oil Change";
+"maintenance.tireCheck" = "Tire Check";
+"maintenance.brakeInspection" = "Brake Inspection";
+
+// MARK: - Errors & Alerts
+"error.title" = "Error";
+"error.unknown" = "An unknown error occurred";
+"error.network" = "Network error";
+"error.noConnection" = "No internet connection";
+"error.locationPermission" = "Location permission required";
+"error.cameraPermission" = "Camera permission required";
+"error.loadFailed" = "Failed to load data";
+"error.saveFailed" = "Failed to save data";
+"error.retry" = "Retry";
+
+// MARK: - Onboarding
+"onboarding.welcome" = "Welcome to MCVenture";
+"onboarding.subtitle" = "Your motorcycle adventure companion";
+"onboarding.permissions" = "Permissions";
+"onboarding.location" = "Location Services";
+"onboarding.locationDesc" = "Track your rides and discover routes";
+"onboarding.camera" = "Camera Access";
+"onboarding.cameraDesc" = "Capture moments during your trips";
+"onboarding.notifications" = "Notifications";
+"onboarding.notificationsDesc" = "Get ride updates and safety alerts";
+"onboarding.getStarted" = "Get Started";
+
+// MARK: - Statistics
+"stats.total" = "Total";
+"stats.average" = "Average";
+"stats.maximum" = "Maximum";
+"stats.this.week" = "This Week";
+"stats.this.month" = "This Month";
+"stats.this.year" = "This Year";
+"stats.all.time" = "All Time";
+
+// MARK: - Privacy & Legal
+"privacy.title" = "Privacy Policy";
+"privacy.terms" = "Terms of Service";
+"privacy.data" = "Your Data";
+"privacy.permissions" = "Permissions";
+
+// MARK: - Misc
+"loading" = "Loading...";
+"searching" = "Searching...";
+"noData" = "No data available";
+"comingSoon" = "Coming Soon";
+"premium" = "Premium";
+"offline" = "Offline Mode";
+"online" = "Online";

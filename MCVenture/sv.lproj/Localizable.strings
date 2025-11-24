@@ -1,0 +1,222 @@
+/* 
+   Localizable.strings (Swedish - Svenska)
+   MCVenture
+*/
+
+// MARK: - Tab Bar
+"tab.routes" = "Rutter";
+"tab.myTrips" = "Mina Resor";
+"tab.profile" = "Profil";
+"tab.more" = "Mer";
+
+// MARK: - Common Buttons
+"button.save" = "Spara";
+"button.cancel" = "Avbryt";
+"button.delete" = "Radera";
+"button.edit" = "Redigera";
+"button.done" = "Klar";
+"button.back" = "Tillbaka";
+"button.next" = "Nästa";
+"button.start" = "Start";
+"button.stop" = "Stopp";
+"button.pause" = "Paus";
+"button.resume" = "Fortsätt";
+"button.share" = "Dela";
+"button.export" = "Exportera";
+"button.import" = "Importera";
+"button.add" = "Lägg till";
+"button.ok" = "OK";
+"button.close" = "Stäng";
+"button.confirm" = "Bekräfta";
+
+// MARK: - Navigation & Titles
+"nav.routes" = "Rutter";
+"nav.myTrips" = "Mina Resor";
+"nav.profile" = "Profil";
+"nav.settings" = "Inställningar";
+"nav.planning" = "Ruttplanering";
+"nav.navigation" = "Navigation";
+"nav.statistics" = "Statistik";
+"nav.achievements" = "Prestationer";
+"nav.community" = "Gemenskap";
+"nav.emergency" = "Nödsituation";
+"nav.maintenance" = "Underhåll";
+
+// MARK: - Routes
+"routes.title" = "Rutter";
+"routes.search" = "Sök rutter...";
+"routes.filter" = "Filtrera";
+"routes.favorites" = "Favoriter";
+"routes.nearby" = "I närheten";
+"routes.popular" = "Populära";
+"routes.new" = "Ny Rutt";
+"routes.noResults" = "Inga rutter hittades";
+"routes.loading" = "Laddar rutter...";
+"routes.distance" = "Avstånd";
+"routes.duration" = "Varaktighet";
+"routes.difficulty" = "Svårighet";
+"routes.elevation" = "Höjd";
+
+// MARK: - Trips
+"trips.title" = "Mina Resor";
+"trips.active" = "Aktiv Resa";
+"trips.history" = "Resehistorik";
+"trips.new" = "Starta Ny Resa";
+"trips.end" = "Avsluta Resa";
+"trips.noTrips" = "Inga resor än";
+"trips.distance" = "Avstånd";
+"trips.duration" = "Varaktighet";
+"trips.speed" = "Hastighet";
+"trips.avgSpeed" = "Medelhastighet";
+"trips.maxSpeed" = "Maxhastighet";
+"trips.startTime" = "Starttid";
+"trips.endTime" = "Sluttid";
+"trips.photos" = "Foton";
+"trips.statistics" = "Statistik";
+
+// MARK: - Profile
+"profile.title" = "Profil";
+"profile.edit" = "Redigera Profil";
+"profile.statistics" = "Statistik";
+"profile.achievements" = "Prestationer";
+"profile.motorcycle" = "Motorcykel";
+"profile.preferences" = "Inställningar";
+"profile.totalDistance" = "Total Distans";
+"profile.totalTrips" = "Totalt Antal Resor";
+"profile.totalTime" = "Total Tid";
+"profile.name" = "Namn";
+"profile.email" = "E-post";
+"profile.bio" = "Bio";
+
+// MARK: - Settings
+"settings.title" = "Inställningar";
+"settings.language" = "Språk";
+"settings.units" = "Enheter";
+"settings.notifications" = "Notiser";
+"settings.privacy" = "Integritet";
+"settings.about" = "Om";
+"settings.help" = "Hjälp";
+"settings.logout" = "Logga ut";
+"settings.version" = "Version";
+"settings.crashDetection" = "Kraschdetektering";
+"settings.offlineMode" = "Offlineläge";
+"settings.autoSync" = "Automatisk Synkronisering";
+
+// MARK: - Language Picker
+"language.title" = "Välj Språk";
+"language.current" = "Nuvarande Språk";
+"language.english" = "Engelska";
+"language.norwegian" = "Norska";
+"language.german" = "Tyska";
+"language.spanish" = "Spanska";
+"language.french" = "Franska";
+
+// MARK: - Units
+"units.metric" = "Metriskt (km)";
+"units.imperial" = "Imperial (mi)";
+"units.distance" = "Avstånd";
+"units.speed" = "Hastighet";
+"units.elevation" = "Höjd";
+"units.km" = "km";
+"units.mi" = "mi";
+"units.kmh" = "km/h";
+"units.mph" = "mph";
+"units.meters" = "m";
+"units.feet" = "ft";
+
+// MARK: - Weather
+"weather.title" = "Väder";
+"weather.current" = "Aktuellt Väder";
+"weather.forecast" = "Prognos";
+"weather.temperature" = "Temperatur";
+"weather.conditions" = "Förhållanden";
+"weather.wind" = "Vind";
+"weather.humidity" = "Luftfuktighet";
+"weather.visibility" = "Sikt";
+
+// MARK: - Navigation
+"navigation.start" = "Starta Navigation";
+"navigation.stop" = "Stoppa Navigation";
+"navigation.reroute" = "Omdirigering";
+"navigation.arrival" = "Ankomst";
+"navigation.destination" = "Destination";
+"navigation.nextTurn" = "Nästa Sväng";
+"navigation.distance" = "Återstående Avstånd";
+"navigation.time" = "Återstående Tid";
+
+// MARK: - Emergency
+"emergency.title" = "Nödsituation";
+"emergency.sos" = "Nöd-SOS";
+"emergency.contacts" = "Nödkontakter";
+"emergency.medical" = "Medicinsk Information";
+"emergency.location" = "Dela Plats";
+"emergency.call" = "Nödsamtal";
+"emergency.crashDetected" = "Krasch Upptäckt";
+"emergency.sendAlert" = "Skicka Varning";
+"emergency.cancel" = "Jag Mår Bra";
+
+// MARK: - Community
+"community.title" = "Gemenskap";
+"community.share" = "Dela Rutt";
+"community.discover" = "Upptäck";
+"community.following" = "Följer";
+"community.followers" = "Följare";
+"community.likes" = "Gillningar";
+"community.comments" = "Kommentarer";
+
+// MARK: - Maintenance
+"maintenance.title" = "Underhåll";
+"maintenance.schedule" = "Underhållsschema";
+"maintenance.history" = "Servicehistorik";
+"maintenance.reminders" = "Påminnelser";
+"maintenance.nextService" = "Nästa Service";
+"maintenance.oilChange" = "Oljebyte";
+"maintenance.tireCheck" = "Däckkontroll";
+"maintenance.brakeInspection" = "Bromsinspektion";
+
+// MARK: - Errors & Alerts
+"error.title" = "Fel";
+"error.unknown" = "Ett okänt fel uppstod";
+"error.network" = "Nätverksfel";
+"error.noConnection" = "Ingen internetanslutning";
+"error.locationPermission" = "Platstillåtelse krävs";
+"error.cameraPermission" = "Kameratillstånd krävs";
+"error.loadFailed" = "Misslyckades ladda data";
+"error.saveFailed" = "Misslyckades spara data";
+"error.retry" = "Försök igen";
+
+// MARK: - Onboarding
+"onboarding.welcome" = "Välkommen till MCVenture";
+"onboarding.subtitle" = "Din motorcykeläventyrskompis";
+"onboarding.permissions" = "Tillstånd";
+"onboarding.location" = "Platstjänster";
+"onboarding.locationDesc" = "Spåra dina resor och upptäck rutter";
+"onboarding.camera" = "Kameraåtkomst";
+"onboarding.cameraDesc" = "Fånga ögonblick under dina resor";
+"onboarding.notifications" = "Notiser";
+"onboarding.notificationsDesc" = "Få reseuppdateringar och säkerhetsvarningar";
+"onboarding.getStarted" = "Kom Igång";
+
+// MARK: - Statistics
+"stats.total" = "Totalt";
+"stats.average" = "Genomsnitt";
+"stats.maximum" = "Maximum";
+"stats.this.week" = "Denna Vecka";
+"stats.this.month" = "Denna Månad";
+"stats.this.year" = "Detta År";
+"stats.all.time" = "All Tid";
+
+// MARK: - Privacy & Legal
+"privacy.title" = "Integritetspolicy";
+"privacy.terms" = "Användarvillkor";
+"privacy.data" = "Din Data";
+"privacy.permissions" = "Tillstånd";
+
+// MARK: - Misc
+"loading" = "Laddar...";
+"searching" = "Söker...";
+"noData" = "Ingen data tillgänglig";
+"comingSoon" = "Kommer Snart";
+"premium" = "Premium";
+"offline" = "Offlineläge";
+"online" = "Online";
