@@ -5,6 +5,7 @@
 
 import SwiftUI
 import Combine
+import UIKit
 
 // MARK: - Lazy Loading Manager
 @MainActor

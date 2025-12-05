@@ -8,6 +8,7 @@ import SwiftUI
 import CoreLocation
 import Photos
 import Combine
+import UIKit
 
 struct TripPhoto: Identifiable, Codable {
     let id: UUID

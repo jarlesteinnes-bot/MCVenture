@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreLocation
 import Combine
+import UIKit
 
 struct MoreView: View {
     @EnvironmentObject var dataManager: DataManager

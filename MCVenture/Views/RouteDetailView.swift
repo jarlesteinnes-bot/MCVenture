@@ -15,6 +15,7 @@ struct RouteDetailView: View {
     let route: EuropeanRoute
     @StateObject private var locationManager = LocationManager()
     @StateObject private var weatherManager = WeatherManager.shared
+    @ObservedObject private var routeIntelligence = RouteIntelligenceEngine.shared
     @State private var showingMap = false
     @State private var currentDistance: Double = 0
     @State private var currentCost: Double = 0
@@ -75,6 +76,12 @@ struct RouteDetailView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 16) {
+                    routeQualitySection
+                    
+                    if !recommendedRoutes.isEmpty {
+                        recommendationsSection
+                    }
+                    
                     // Weather Alerts
                     if !weatherManager.currentWeatherAlerts.isEmpty {
                         VStack(spacing: 12) {
@@ -340,6 +347,108 @@ struct RouteDetailView: View {
                 UIApplication.shared.isIdleTimerDisabled = false
             }
         }
+    }
+    
+    // MARK: - Route Intelligence
+    private var qualityScore: RouteQualityScore {
+        routeIntelligence.routeQuality(for: route)
+    }
+    
+    private var recommendedRoutes: [RouteRecommendation] {
+        routeIntelligence.recommendedRoutes(for: route)
+    }
+    
+    private var routeQualitySection: some View {
+        let score = qualityScore
+        return VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Route Quality Score")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text("Powered by live rider telemetry")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+                Spacer()
+                
+                Text("\(Int(score.overall * 100))")
+                    .font(.system(size: 48, weight: .heavy, design: .rounded))
+                    .foregroundColor(.orange)
+                    .accessibilityLabel("Quality score \(Int(score.overall * 100)) out of 100")
+            }
+            
+            VStack(spacing: 12) {
+                qualityMetricRow(title: "Smoothness", value: score.smoothness, icon: "waveform.path.ecg")
+                qualityMetricRow(title: "Flow", value: score.flow, icon: "speedometer")
+                qualityMetricRow(title: "Technicality", value: score.technicality, icon: "figure.motorcycling")
+                qualityMetricRow(title: "Safety", value: score.safety, icon: "shield.lefthalf.filled")
+            }
+            
+            Text("Confidence \(Int(score.dataConfidence * 100))% • Updated from anonymized ride clusters.")
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color(UIColor.secondarySystemBackground))
+        )
+        .accessibilityElement(children: .combine)
+    }
+    
+    private func qualityMetricRow(title: String, value: Double, icon: String) -> some View {
+        HStack {
+            Label(title, systemImage: icon)
+                .font(.subheadline)
+                .frame(width: 140, alignment: .leading)
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(Color.primary.opacity(0.12))
+                    Capsule()
+                        .fill(LinearGradient(colors: [.orange, .red], startPoint: .leading, endPoint: .trailing))
+                        .frame(width: geometry.size.width * CGFloat(value.clamped()))
+                }
+            }
+            .frame(height: 10)
+            
+            Text("\(Int(value * 100))")
+                .font(.caption)
+                .foregroundColor(.secondary)
+                .frame(width: 40, alignment: .trailing)
+        }
+    }
+    
+    private var recommendationsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Similar Routes You May Love")
+                .font(.headline)
+            
+            ForEach(recommendedRoutes) { recommendation in
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack {
+                        Text(recommendation.route.name)
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                        Spacer()
+                        Text("\(Int(recommendation.similarity * 100))% match")
+                            .font(.caption)
+                            .foregroundColor(.orange)
+                    }
+                    Text(recommendation.rationale.capitalized)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Divider()
+                }
+            }
+        }
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(Color(UIColor.secondarySystemBackground))
+        )
     }
     
     func startTracking() {
@@ -982,3 +1091,9 @@ struct MapPolylineOverlay: View {
 }
 
 // GasStation is defined in FuelStopPlanner.swift
+
+private extension Double {
+    func clamped() -> Double {
+        max(0, min(1, self))
+    }
+}

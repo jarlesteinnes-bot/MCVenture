@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 /// Navigation overlay UI displayed during active navigation
 struct NavigationOverlayView: View {

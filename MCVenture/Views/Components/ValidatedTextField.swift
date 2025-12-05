@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 /// TextField with built-in validation using InputValidator
 struct ValidatedTextField: View {
