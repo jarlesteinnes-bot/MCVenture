@@ -3,6 +3,7 @@
 import SwiftUI
 import StoreKit
 import Combine
+import UIKit
 
 class AppSettings: ObservableObject {
     static let shared = AppSettings()

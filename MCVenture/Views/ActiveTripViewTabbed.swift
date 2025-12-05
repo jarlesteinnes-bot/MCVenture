@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import UIKit
 
 struct ActiveTripViewTabbed: View {
     @Environment(\.dismiss) var dismiss

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import UIKit
 
 struct ActiveTripView: View {
     @Environment(\.dismiss) var dismiss

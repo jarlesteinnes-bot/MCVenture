@@ -7,6 +7,7 @@
 
 import SwiftUI
 import WebKit
+import UIKit
 
 struct UserManualView: View {
     @Environment(\.dismiss) private var dismiss
