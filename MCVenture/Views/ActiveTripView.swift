@@ -385,6 +385,16 @@ struct ActiveTripView: View {
         )
         
         dataManager.addCompletedTrip(trip)
+        
+        let snapshot = ProModeManager.shared.captureTelemetrySnapshot(distance: summary.distance,
+                                                                      duration: summary.duration)
+        RouteIntelligenceEngine.shared.ingestTrip(
+            routeName: trip.routeName,
+            sourceRouteId: nil,
+            summary: summary,
+            snapshot: snapshot,
+            metadata: trip
+        )
         dismiss()
     }
     
