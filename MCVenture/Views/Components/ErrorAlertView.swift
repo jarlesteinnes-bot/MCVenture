@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 enum AppError: Identifiable {
     case networkUnavailable

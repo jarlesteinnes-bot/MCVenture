@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct EmergencyContactsView: View {
     @StateObject private var emergencyManager = EmergencyManager.shared
