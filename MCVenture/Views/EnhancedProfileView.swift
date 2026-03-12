@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct EnhancedProfileView: View {
     @Environment(\.dismiss) var dismiss

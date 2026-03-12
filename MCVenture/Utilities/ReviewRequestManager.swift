@@ -8,6 +8,7 @@
 import Foundation
 import StoreKit
 import SwiftUI
+import UIKit
 
 class ReviewRequestManager {
     static let shared = ReviewRequestManager()

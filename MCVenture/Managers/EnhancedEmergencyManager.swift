@@ -8,6 +8,7 @@ import CoreLocation
 import AVFoundation
 import MessageUI
 import Combine
+import UIKit
 
 class EnhancedEmergencyManager: ObservableObject {
     static let shared = EnhancedEmergencyManager()

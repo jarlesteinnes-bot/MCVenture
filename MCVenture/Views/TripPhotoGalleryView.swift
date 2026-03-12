@@ -5,6 +5,7 @@
 
 import SwiftUI
 import MapKit
+import UIKit
 
 struct TripPhotoGalleryView: View {
     let tripId: UUID

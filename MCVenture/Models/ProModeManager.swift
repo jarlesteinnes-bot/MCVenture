@@ -90,6 +90,47 @@ class ProModeManager: ObservableObject {
         curvatureAnalyzer.reset()
     }
     
+    /// Captures a condensed snapshot of telemetry values for ML scoring.
+    func captureTelemetrySnapshot(distance: Double, duration: TimeInterval) -> TelemetrySnapshot {
+        guard isProModeEnabled else {
+            return TelemetrySnapshot.placeholder
+        }
+        let km = max(distance, 0.1)
+        let leanSamples = leanAngleTracker.leanHistory.map { abs($0.angle) }
+        let avgLean = leanSamples.isEmpty
+            ? (abs(leanAngleTracker.maxLeftLean) + abs(leanAngleTracker.maxRightLean)) / 2.0
+            : leanSamples.reduce(0, +) / Double(leanSamples.count)
+        
+        let lateralSamples = gForceTracker.gForceHistory.map { abs($0.gForce.lateral) }
+        let avgLateralG = lateralSamples.isEmpty
+            ? abs(gForceTracker.currentGForce.lateral)
+            : lateralSamples.reduce(0, +) / Double(lateralSamples.count)
+        let maxLateralG = max(abs(gForceTracker.maxGForce.lateral), lateralSamples.max() ?? 0)
+        
+        let brakingDrop: Double
+        if cornerAnalyzer.corners.isEmpty {
+            brakingDrop = 0
+        } else {
+            let drops = cornerAnalyzer.corners.map { max(0, $0.entrySpeed - $0.apexSpeed) }
+            brakingDrop = drops.reduce(0, +) / Double(drops.count)
+        }
+        
+        return TelemetrySnapshot(
+            timestamp: Date(),
+            averageLeanAngle: avgLean,
+            maxLeanLeft: leanAngleTracker.maxLeftLean,
+            maxLeanRight: leanAngleTracker.maxRightLean,
+            averageSurfaceQuality: surfaceDetector.currentQuality,
+            potholeDensityPer100Km: (Double(surfaceDetector.potholeCount) / km) * 100,
+            turnDensityPer10Km: (Double(curvatureAnalyzer.turnCount) / km) * 10,
+            hairpinDensityPer10Km: (Double(curvatureAnalyzer.hairpinCount) / km) * 10,
+            averageLateralG: avgLateralG,
+            maxLateralG: maxLateralG,
+            vibrationScore: max(0, 1.0 - surfaceDetector.currentQuality),
+            brakingIntensity: min(1.0, brakingDrop / 80.0)
+        )
+    }
+    
     // MARK: - AI Insights
     func getRidingStyleAnalysis(avgSpeed: Double, corners: [Corner], maxLean: Double) -> RidingStyle {
         let avgCornerSpeed = corners.map { $0.apexSpeed }.reduce(0, +) / Double(max(corners.count, 1))

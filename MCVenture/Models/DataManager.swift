@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import UIKit
 
 class DataManager: ObservableObject {
     static let shared = DataManager()
